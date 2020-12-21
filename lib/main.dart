@@ -17,15 +17,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Marbene',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: Obx(
-        () => authService.user == null ? LoginScreen() : HomeScreen(),
-      ),
-    );
+        title: 'Marbene',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.grey,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+        home: authService.user == null
+            ? LoginScreen()
+            : HomeScreen() //authService.user == null ? LoginScreen() : HomeScreen(),
+        );
   }
 }
