@@ -9,10 +9,31 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var authService = Get.find<AuthenticationService>();
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            FlatButton(
+              onPressed: () => print('object'),
+              color: Colors.blue,
+              child: Container(
+                margin: EdgeInsets.all(15),
+                child: Text(
+                  'Try Free Test',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
+                ),
+              ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(25),
+                  bottomRight: Radius.circular(25),
+                ),
+              ),
+            ),
             Expanded(
               child: FlutterLogin(
                 onSignup: (input) => authService.registerWithEmailAndPassword(
@@ -37,27 +58,6 @@ class LoginScreen extends StatelessWidget {
                   pageColorLight: Colors.white,
                   primaryColor: Colors.blue,
                   accentColor: Colors.blue,
-                ),
-              ),
-            ),
-            Container(
-              height: 0.05 * Get.height,
-              child: FlatButton(
-                onPressed: () => print('object'),
-                color: Colors.blue,
-                child: Text(
-                  'Try Free Test',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                  ),
-                ),
-                shape: BeveledRectangleBorder(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(50),
-                    topRight: Radius.circular(50),
-                  ),
                 ),
               ),
             ),
