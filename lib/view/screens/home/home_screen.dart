@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:marbene/view/screens/home/widgets/home_tab.dart';
+import 'widgets/home_tab.dart';
 import '../../../model/services/authentication_service.dart';
 import '../../widgets/app_scaffold.dart';
 
@@ -10,16 +10,31 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
-      imageSource: 'assets/logo.png',
       body: ListView(
-        children: [
-          {"title": "Previous Tests", "onPressed": () => print('p')},
-          {"title": "Create Test", "onPressed": () => print('c')},
-          {"title": "Past Questions", "onPressed": () => print('pa')},
-          {"title": "Mock", "onPressed": () => print('m')},
+        children: <Map<String, dynamic>>[
+          {
+            "title": "Custom",
+            "onPressed": null,
+          },
+          {
+            "title": "Multiple Choice",
+            "onPressed": null,
+          },
+          {
+            "title": "Picture Test",
+            "onPressed": null,
+          },
+          {
+            "title": "Theory",
+            "onPressed": null,
+          },
+          {
+            "title": "Mock",
+            "onPressed": null,
+          },
           {
             "title": "Logout",
-            "onPressed": () => Get.find<AuthenticationService>().signOut()
+            "onPressed": () => Get.find<AuthenticationService>().signOut(),
           }
         ]
             .map(

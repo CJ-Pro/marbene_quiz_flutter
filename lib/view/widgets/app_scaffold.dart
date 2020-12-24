@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class AppScaffold extends StatelessWidget {
   final Widget body;
-  final String imageSource;
 
-  const AppScaffold({@required this.body, @required this.imageSource});
+  const AppScaffold({
+    @required this.body,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class AppScaffold extends StatelessWidget {
         title: Hero(
           tag: 'logo',
           child: Image.asset(
-            imageSource,
+            'assets/logo.png',
             height: 40,
             fit: BoxFit.contain,
           ),

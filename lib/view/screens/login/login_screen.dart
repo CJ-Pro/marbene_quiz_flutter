@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
 import 'package:get/get.dart';
+import 'widgets/free_test_button.dart';
 import '../home/home_screen.dart';
 import '../../../model/services/authentication_service.dart';
 
@@ -13,27 +14,7 @@ class LoginScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            FlatButton(
-              onPressed: () => print('object'),
-              color: Colors.blue,
-              child: Container(
-                margin: EdgeInsets.all(15),
-                child: Text(
-                  'Try Free Test',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                  ),
-                ),
-              ),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(25),
-                  bottomRight: Radius.circular(25),
-                ),
-              ),
-            ),
+            FreeTestButton(),
             Expanded(
               child: FlutterLogin(
                 onSignup: (input) => authService.registerWithEmailAndPassword(
@@ -56,8 +37,8 @@ class LoginScreen extends StatelessWidget {
                   ),
                   pageColorDark: Colors.white,
                   pageColorLight: Colors.white,
-                  primaryColor: Colors.blue,
-                  accentColor: Colors.blue,
+                  primaryColor: Colors.lightBlue,
+                  accentColor: Colors.lightBlue,
                 ),
               ),
             ),
