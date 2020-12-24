@@ -3,7 +3,7 @@ import 'package:flutter_login/flutter_login.dart';
 import 'package:get/get.dart';
 import 'widgets/free_test_button.dart';
 import '../home/home_screen.dart';
-import '../../../model/services/authentication_service.dart';
+import '../../../services/authentication_service.dart';
 
 class LoginScreen extends StatelessWidget {
   @override

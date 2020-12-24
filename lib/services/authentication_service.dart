@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
-import '../../view/screens/login/login_screen.dart';
+import '../view/screens/login/login_screen.dart';
 
 class AuthenticationService extends GetxService {
   FirebaseAuth _auth = FirebaseAuth.instance;
