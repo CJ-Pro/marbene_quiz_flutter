@@ -26,6 +26,7 @@ dependencies:
   cupertino_icons: ^1.0.0
   firebase_auth: ^0.18.4+1
   firebase_core: ^0.5.3
+  firebase_database: ^4.4.0
   flutter_login: ^1.0.14
   get: ^3.23.1
 
