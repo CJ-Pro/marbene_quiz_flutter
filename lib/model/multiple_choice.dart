@@ -68,7 +68,7 @@ class MultipleChoice extends Question {
 
     return MultipleChoice(
       answer: map['answer'],
-      choices: List<Map<dynamic, dynamic>>.from(map['choices'])
+      choices: List<Map<dynamic, dynamic>>.from(map['choices'] ?? [])
           .map((e) => (e['choice'] as String))
           .toList(),
       explanation: map['explanation'],
