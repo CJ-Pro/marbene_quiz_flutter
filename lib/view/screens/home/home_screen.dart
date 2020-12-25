@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'widgets/home_tab.dart';
+import '../../screens/multiple_choice/multiple_choice_screen.dart';
+import 'widgets/tab.dart';
 import '../../../services/authentication_service.dart';
-import '../../../repository/question_repository.dart';
 import '../../widgets/app_scaffold.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -19,7 +19,7 @@ class HomeScreen extends StatelessWidget {
           },
           {
             "title": "Multiple Choice",
-            "onPressed": null,
+            "onPressed": () => Get.to(MultipleChoiceScreen()),
           },
           {
             "title": "Picture Test",

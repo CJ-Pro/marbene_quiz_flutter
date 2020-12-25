@@ -5,11 +5,10 @@ import '../model/picture_test.dart';
 import '../model/theory.dart';
 
 class QuestionRepository {
-  var _database = FirebaseDatabase.instance;
-  DatabaseReference _reference;
+  static var _database = FirebaseDatabase.instance;
+  static DatabaseReference _reference = _database.reference();
 
   QuestionRepository() {
-    _reference = _database.reference();
     _database.setPersistenceEnabled(true);
   }
   Future<List<MultipleChoice>> get getMultipleChoice async {
