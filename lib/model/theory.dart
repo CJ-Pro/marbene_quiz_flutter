@@ -20,7 +20,13 @@ class Theory extends Question {
     this.year,
     this.name,
     this.id,
-  }) : super(name: name, id: id, subject: subject, system: system);
+  }) : super(
+          name: name,
+          id: id,
+          subject: subject,
+          system: system,
+          category: "theory",
+        );
 
   Theory copyWith({
     List<String> questions,
@@ -101,7 +107,4 @@ class Theory extends Question {
         year.hashCode ^
         id.hashCode;
   }
-
-  @override
-  String get category => "theory";
 }

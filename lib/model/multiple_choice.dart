@@ -23,7 +23,13 @@ class MultipleChoice extends Question {
     this.subject,
     this.system,
     this.year,
-  }) : super(name: name, id: id, subject: subject, system: system);
+  }) : super(
+          name: name,
+          id: id,
+          subject: subject,
+          system: system,
+          category: "multipleChoice",
+        );
 
   MultipleChoice copyWith({
     int answer,
@@ -119,7 +125,4 @@ class MultipleChoice extends Question {
         system.hashCode ^
         year.hashCode;
   }
-
-  @override
-  String get category => "multipleChoice";
 }
