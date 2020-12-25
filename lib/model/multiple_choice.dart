@@ -10,8 +10,8 @@ class MultipleChoice implements Question {
   final int id;
   final String name;
   final String question;
-  final String subject;
-  final String system;
+  String subject;
+  String system;
   final int year;
   MultipleChoice({
     this.answer,

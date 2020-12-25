@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class HomeTab extends StatelessWidget {
+class TabWidget extends StatelessWidget {
   final String title;
   final VoidCallback onPressed;
-  const HomeTab({Key key, @required this.title, @required this.onPressed})
+  const TabWidget({Key key, @required this.title, @required this.onPressed})
       : super(key: key);
 
   @override

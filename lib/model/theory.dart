@@ -7,8 +7,8 @@ import 'question.dart';
 class Theory implements Question {
   final List<String> questions;
   final List<String> answers;
-  final String subject;
-  final String system;
+  String subject;
+  String system;
   final String year;
   final int id;
   Theory({
