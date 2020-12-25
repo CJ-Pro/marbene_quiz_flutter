@@ -4,12 +4,13 @@ import 'package:flutter/foundation.dart';
 
 import 'question.dart';
 
-class Theory implements Question {
+class Theory extends Question {
   final List<String> questions;
   final List<String> answers;
-  String subject;
-  String system;
+  final String subject;
+  final String system;
   final int year;
+  final String name;
   final int id;
   Theory({
     this.questions,
@@ -17,8 +18,9 @@ class Theory implements Question {
     this.subject,
     this.system,
     this.year,
+    this.name,
     this.id,
-  });
+  }) : super(name: name, id: id, subject: subject, system: system);
 
   Theory copyWith({
     List<String> questions,
@@ -35,6 +37,7 @@ class Theory implements Question {
       system: system ?? this.system,
       year: year ?? this.year,
       id: id ?? this.id,
+      name: name ?? this.name,
     );
   }
 
@@ -53,16 +56,17 @@ class Theory implements Question {
     if (map == null) return null;
 
     return Theory(
-      questions: List<Map<dynamic, dynamic>>.from(map['questions'])
+      questions: List<Map<dynamic, dynamic>>.from(map['questions'] ?? [])
           .map((e) => (e['question'] as String))
           .toList(),
-      answers: List<Map<dynamic, dynamic>>.from(map['answers'])
+      answers: List<Map<dynamic, dynamic>>.from(map['answers'] ?? [])
           .map((e) => (e['answer'] as String))
           .toList(),
       subject: map['subject'],
       system: map['system'],
       year: map['year'],
       id: map['id'],
+      name: map['name'],
     );
   }
 

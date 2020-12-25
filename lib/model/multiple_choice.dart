@@ -3,15 +3,15 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'question.dart';
 
-class MultipleChoice implements Question {
+class MultipleChoice extends Question {
   final int answer;
   final List<String> choices;
   final String explanation;
   final int id;
   final String name;
   final String question;
-  String subject;
-  String system;
+  final String subject;
+  final String system;
   final int year;
   MultipleChoice({
     this.answer,
@@ -23,7 +23,7 @@ class MultipleChoice implements Question {
     this.subject,
     this.system,
     this.year,
-  });
+  }) : super(name: name, id: id, subject: subject, system: system);
 
   MultipleChoice copyWith({
     int answer,
