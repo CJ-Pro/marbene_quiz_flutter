@@ -3,9 +3,9 @@ import '../../../model/question.dart';
 import '../../widgets/app_scaffold.dart';
 import '../../widgets/tab.dart';
 
-class CategoryScreen extends StatelessWidget {
+class SystemScreen extends StatelessWidget {
   final List<Question> questions;
-  const CategoryScreen({
+  const SystemScreen({
     Key key,
     @required this.questions,
   }) : super(key: key);

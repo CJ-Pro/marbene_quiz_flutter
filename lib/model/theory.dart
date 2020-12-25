@@ -9,7 +9,7 @@ class Theory implements Question {
   final List<String> answers;
   String subject;
   String system;
-  final String year;
+  final int year;
   final int id;
   Theory({
     this.questions,

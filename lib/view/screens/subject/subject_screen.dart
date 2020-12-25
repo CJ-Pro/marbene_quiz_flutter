@@ -1,21 +1,43 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:marbene/model/question.dart';
-import 'package:marbene/view/screens/category/category_screen.dart';
-import 'package:marbene/view/widgets/tab.dart';
+import '../system/system_screen.dart';
+import '../../widgets/tab.dart';
+import '../../../model/question.dart';
 import '../../../repository/question_repository.dart';
 import '../../widgets/app_scaffold.dart';
 
-class MultipleChoiceScreen extends StatelessWidget {
-  const MultipleChoiceScreen({Key key}) : super(key: key);
+class SubjectScreen extends StatefulWidget {
+  final String category;
+  const SubjectScreen({
+    Key key,
+    @required this.category,
+  }) : super(key: key);
+
+  @override
+  _SubjectScreenState createState() => _SubjectScreenState();
+}
+
+class _SubjectScreenState extends State<SubjectScreen> {
+  Future<List<Question>> _future;
+
+  @override
+  void initState() {
+    Get.lazyPut(() => QuestionRepository());
+    if (widget.category == "multipleChoice")
+      _future = Get.find<QuestionRepository>().getMultipleChoice;
+    else if (widget.category == "pictureTest")
+      _future = Get.find<QuestionRepository>().getPictureTest;
+    else
+      _future = Get.find<QuestionRepository>().getTheory;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    Get.lazyPut(() => QuestionRepository());
     return AppScaffold(
       body: FutureBuilder(
-        future: Get.find<QuestionRepository>().getMultipleChoice,
+        future: _future,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
             var questions = List<Question>.from(snapshot.data);
@@ -28,7 +50,7 @@ class MultipleChoiceScreen extends StatelessWidget {
                       (subject) => TabWidget(
                         title: subject,
                         onPressed: () => Get.to(
-                          CategoryScreen(
+                          SystemScreen(
                             questions: questions
                                 .where((element) => element.subject == subject)
                                 .toList(),
