@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../test/test_screen.dart';
-import '../../../model/question.dart';
+import '../../../model/question/question.dart';
 import '../../widgets/app_scaffold.dart';
 import '../../widgets/tab.dart';
 

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../system/system_screen.dart';
 import '../../widgets/tab.dart';
-import '../../../model/question.dart';
+import '../../../model/question/question.dart';
 import '../../../repository/question_repository.dart';
 import '../../widgets/app_scaffold.dart';
 
@@ -41,6 +41,9 @@ class _SubjectScreenState extends State<SubjectScreen> {
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
             var questions = List<Question>.from(snapshot.data);
+            print(questions.first.runtimeType);
+            print(questions.first is MultipleChoice);
+            print(questions.first.id);
             var subjects = questions.map((e) => e.subject).toSet();
             return ListView(
               children: List<Widget>.from(

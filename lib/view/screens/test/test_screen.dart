@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:marbene/model/question_reference.dart';
 import '../../widgets/app_scaffold.dart';
 import '../../../repository/test_repository.dart';
-import '../../../model/question.dart';
+import '../../../model/question/question.dart';
 import '../../../model/test.dart';
 
 class TestScreen extends StatelessWidget {

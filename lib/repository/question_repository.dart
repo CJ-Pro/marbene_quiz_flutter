@@ -1,12 +1,8 @@
 import 'dart:collection';
 
-import 'package:firebase_database/firebase_database.dart';
 import 'package:get/get.dart';
 import 'package:marbene/services/database_service.dart';
-import '../model/question.dart';
-import '../model/multiple_choice.dart';
-import '../model/picture_test.dart';
-import '../model/theory.dart';
+import '../model/question/question.dart';
 
 class QuestionRepository {
   final _reference = Get.find<DatabaseService>().ref;
@@ -26,14 +22,14 @@ class QuestionRepository {
         .toList();
   }
 
-  Future<List<PictureTest>> get getPictureTest async {
+  Future<List<PictureMultipleChoice>> get getPictureTest async {
     var pictureTestRef = _reference.child(getPath('pictureTest'));
     pictureTestRef.keepSynced(true);
     var snapshot = await pictureTestRef.once();
     List questions = Map.from(snapshot.value).values.toList();
     return questions
         .map(
-          (element) => PictureTest.fromMap(
+          (element) => PictureMultipleChoice.fromMap(
             Map<String, dynamic>.from(element),
           ),
         )
@@ -60,7 +56,7 @@ class QuestionRepository {
     Map questionMap = Map.from(snapshot.value);
     return {
       "multipleChoice": MultipleChoice.fromMap(questionMap[id]),
-      "pictureTest": PictureTest.fromMap(questionMap[id]),
+      "pictureTest": PictureMultipleChoice.fromMap(questionMap[id]),
       "theory": Theory.fromMap(questionMap[id]),
     }[category];
   }

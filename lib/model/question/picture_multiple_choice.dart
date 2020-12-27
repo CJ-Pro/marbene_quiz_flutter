@@ -4,32 +4,33 @@ import 'package:flutter/foundation.dart';
 
 import 'question.dart';
 
-class PictureTest extends Question {
+class PictureMultipleChoice extends Question {
+  final String question;
   final int answer;
   final List<String> choices;
   final String explanation;
-  final int id;
-  final String name;
-  final String question;
-  final String subject;
-  final String system;
-  final int year;
-  PictureTest({
+  PictureMultipleChoice({
+    id,
+    name,
+    subject,
+    system,
+    year,
+    this.question,
     this.answer,
     this.choices,
     this.explanation,
-    this.id,
-    this.name,
-    this.question,
-    this.subject,
-    this.system,
-    this.year,
-  });
+  }) : super(
+          id: id,
+          name: name,
+          subject: subject,
+          system: system,
+          year: year,
+        );
 
   @override
   QuestionCategory get category => QuestionCategory.pictureTest;
 
-  PictureTest copyWith({
+  PictureMultipleChoice copyWith({
     int answer,
     List<String> choices,
     String explanation,
@@ -40,7 +41,7 @@ class PictureTest extends Question {
     String system,
     int year,
   }) {
-    return PictureTest(
+    return PictureMultipleChoice(
       answer: answer ?? this.answer,
       choices: choices ?? this.choices,
       explanation: explanation ?? this.explanation,
@@ -67,10 +68,10 @@ class PictureTest extends Question {
     };
   }
 
-  factory PictureTest.fromMap(Map<String, dynamic> map) {
+  factory PictureMultipleChoice.fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
 
-    return PictureTest(
+    return PictureMultipleChoice(
       answer: map['answer'],
       choices: List<String>.from(
         List<Map>.from(map['choices'])
@@ -89,8 +90,8 @@ class PictureTest extends Question {
 
   String toJson() => json.encode(toMap());
 
-  factory PictureTest.fromJson(String source) =>
-      PictureTest.fromMap(json.decode(source));
+  factory PictureMultipleChoice.fromJson(String source) =>
+      PictureMultipleChoice.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -101,7 +102,7 @@ class PictureTest extends Question {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is PictureTest &&
+    return o is PictureMultipleChoice &&
         o.answer == answer &&
         listEquals(o.choices, choices) &&
         o.explanation == explanation &&

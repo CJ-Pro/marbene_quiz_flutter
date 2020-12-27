@@ -5,26 +5,27 @@ import 'package:flutter/foundation.dart';
 import 'question.dart';
 
 class MultipleChoice extends Question {
+  final String question;
   final int answer;
   final List<String> choices;
   final String explanation;
-  final int id;
-  final String name;
-  final String question;
-  final String subject;
-  final String system;
-  final int year;
   MultipleChoice({
+    id,
+    name,
+    subject,
+    system,
+    year,
+    this.question,
     this.answer,
     this.choices,
     this.explanation,
-    this.id,
-    this.name,
-    this.question,
-    this.subject,
-    this.system,
-    this.year,
-  });
+  }) : super(
+          id: id,
+          name: name,
+          subject: subject,
+          system: system,
+          year: year,
+        );
 
   @override
   QuestionCategory get category => QuestionCategory.multipleChoice;

@@ -7,21 +7,21 @@ import 'question.dart';
 class Theory extends Question {
   final List<String> questions;
   final List<String> answers;
-  final String subject;
-  final String system;
-  final int year;
-  final String name;
-  final int id;
   Theory({
+    id,
+    name,
+    subject,
+    system,
+    year,
     this.questions,
     this.answers,
-    this.subject,
-    this.system,
-    this.year,
-    this.name,
-    this.id,
-  });
-
+  }) : super(
+          id: id,
+          name: name,
+          subject: subject,
+          system: system,
+          year: year,
+        );
   @override
   QuestionCategory get category => QuestionCategory.theory;
 
