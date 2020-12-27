@@ -20,20 +20,18 @@ class Theory extends Question {
     this.year,
     this.name,
     this.id,
-  }) : super(
-          name: name,
-          id: id,
-          subject: subject,
-          system: system,
-          category: "theory",
-        );
+  });
+
+  @override
+  QuestionCategory get category => QuestionCategory.theory;
 
   Theory copyWith({
     List<String> questions,
     List<String> answers,
     String subject,
     String system,
-    String year,
+    int year,
+    String name,
     int id,
   }) {
     return Theory(
@@ -42,8 +40,8 @@ class Theory extends Question {
       subject: subject ?? this.subject,
       system: system ?? this.system,
       year: year ?? this.year,
-      id: id ?? this.id,
       name: name ?? this.name,
+      id: id ?? this.id,
     );
   }
 
@@ -54,6 +52,7 @@ class Theory extends Question {
       'subject': subject,
       'system': system,
       'year': year,
+      'name': name,
       'id': id,
     };
   }
@@ -62,17 +61,21 @@ class Theory extends Question {
     if (map == null) return null;
 
     return Theory(
-      questions: List<Map<dynamic, dynamic>>.from(map['questions'] ?? [])
-          .map((e) => (e['question'] as String))
-          .toList(),
-      answers: List<Map<dynamic, dynamic>>.from(map['answers'] ?? [])
-          .map((e) => (e['answer'] as String))
-          .toList(),
+      questions: List<String>.from(
+        List<Map>.from(map['questions'])
+            ?.map((e) => e['question'] as String)
+            ?.toList(),
+      ),
+      answers: List<String>.from(
+        List<Map>.from(map['answers'])
+            ?.map((e) => e['answer'] as String)
+            ?.toList(),
+      ),
       subject: map['subject'],
       system: map['system'],
       year: map['year'],
-      id: map['id'],
       name: map['name'],
+      id: map['id'],
     );
   }
 
@@ -82,7 +85,7 @@ class Theory extends Question {
 
   @override
   String toString() {
-    return 'Theory(questions: $questions, answers: $answers, subject: $subject, system: $system, year: $year, id: $id)';
+    return 'Theory(questions: $questions, answers: $answers, subject: $subject, system: $system, year: $year, name: $name, id: $id)';
   }
 
   @override
@@ -95,6 +98,7 @@ class Theory extends Question {
         o.subject == subject &&
         o.system == system &&
         o.year == year &&
+        o.name == name &&
         o.id == id;
   }
 
@@ -105,6 +109,7 @@ class Theory extends Question {
         subject.hashCode ^
         system.hashCode ^
         year.hashCode ^
+        name.hashCode ^
         id.hashCode;
   }
 }

@@ -1,9 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
+
 import 'question.dart';
 
-class MultipleChoice extends Question {
+class PictureTest extends Question {
   final int answer;
   final List<String> choices;
   final String explanation;
@@ -13,7 +14,7 @@ class MultipleChoice extends Question {
   final String subject;
   final String system;
   final int year;
-  MultipleChoice({
+  PictureTest({
     this.answer,
     this.choices,
     this.explanation,
@@ -23,17 +24,14 @@ class MultipleChoice extends Question {
     this.subject,
     this.system,
     this.year,
-  }) : super(
-          name: name,
-          id: id,
-          subject: subject,
-          system: system,
-          category: "multipleChoice",
-        );
+  });
 
-  MultipleChoice copyWith({
+  @override
+  QuestionCategory get category => QuestionCategory.pictureTest;
+
+  PictureTest copyWith({
     int answer,
-    List<dynamic> choices,
+    List<String> choices,
     String explanation,
     int id,
     String name,
@@ -42,7 +40,7 @@ class MultipleChoice extends Question {
     String system,
     int year,
   }) {
-    return MultipleChoice(
+    return PictureTest(
       answer: answer ?? this.answer,
       choices: choices ?? this.choices,
       explanation: explanation ?? this.explanation,
@@ -69,14 +67,16 @@ class MultipleChoice extends Question {
     };
   }
 
-  factory MultipleChoice.fromMap(Map<String, dynamic> map) {
+  factory PictureTest.fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
 
-    return MultipleChoice(
+    return PictureTest(
       answer: map['answer'],
-      choices: List<Map<dynamic, dynamic>>.from(map['choices'] ?? [])
-          .map((e) => (e['choice'] as String))
-          .toList(),
+      choices: List<String>.from(
+        List<Map>.from(map['choices'])
+            ?.map((e) => e['choice'] as String)
+            ?.toList(),
+      ),
       explanation: map['explanation'],
       id: map['id'],
       name: map['name'],
@@ -89,8 +89,8 @@ class MultipleChoice extends Question {
 
   String toJson() => json.encode(toMap());
 
-  factory MultipleChoice.fromJson(String source) =>
-      MultipleChoice.fromMap(json.decode(source));
+  factory PictureTest.fromJson(String source) =>
+      PictureTest.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -101,7 +101,7 @@ class MultipleChoice extends Question {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is MultipleChoice &&
+    return o is PictureTest &&
         o.answer == answer &&
         listEquals(o.choices, choices) &&
         o.explanation == explanation &&
