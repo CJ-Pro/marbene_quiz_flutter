@@ -1,21 +1,22 @@
+import 'dart:collection';
+
 import 'package:firebase_database/firebase_database.dart';
+import 'package:get/get.dart';
+import 'package:marbene/services/database_service.dart';
 import '../model/question.dart';
 import '../model/multiple_choice.dart';
 import '../model/picture_test.dart';
 import '../model/theory.dart';
 
 class QuestionRepository {
-  static var _database = FirebaseDatabase.instance;
-  static DatabaseReference _reference = _database.reference();
+  final _reference = Get.find<DatabaseService>().ref;
 
-  QuestionRepository() {
-    _database.setPersistenceEnabled(true);
-  }
   Future<List<MultipleChoice>> get getMultipleChoice async {
-    var multipleChoiceRef = _reference.child(getPath('multipleChoice'));
+    var multipleChoiceRef =
+        _reference.child(getPath('multipleChoice')).orderByChild("createdDate");
     multipleChoiceRef.keepSynced(true);
     var snapshot = await multipleChoiceRef.once();
-    List questions = Map.from(snapshot.value).values.toList();
+    List questions = LinkedHashMap.from(snapshot.value).values.toList();
     return questions
         .map(
           (element) => MultipleChoice.fromMap(
@@ -72,5 +73,5 @@ class QuestionRepository {
   }
 
   String getPath(String category) =>
-      'flamelink/environments/production/content/$category/en-US';
+      'flamelink/environments/production/content/$category/en-US/';
 }

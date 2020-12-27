@@ -14,24 +14,24 @@ class TabWidget extends StatelessWidget {
         onTap: onPressed,
         child: Container(
           margin: EdgeInsets.symmetric(
-            vertical: 0.05 * Get.width,
+            vertical: 0.04 * Get.width,
           ),
           height: 1 / 7 * Get.height,
-          width: 3 / 5 * Get.width,
+          width: 7 / 10 * Get.width,
           child: Text(
             title,
             textAlign: TextAlign.center,
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,
-              fontSize: 22,
+              fontSize: 21,
             ),
           ),
           alignment: Alignment.center,
           decoration: BoxDecoration(
             color: Colors.blue,
             borderRadius: BorderRadius.circular(
-              0.1 * Get.width,
+              0.05 * Get.width,
             ),
           ),
         ),

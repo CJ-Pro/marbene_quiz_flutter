@@ -41,7 +41,6 @@ class _SubjectScreenState extends State<SubjectScreen> {
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
             var questions = List<Question>.from(snapshot.data);
-            questions.shuffle();
             var subjects = questions.map((e) => e.subject).toSet();
             return ListView(
               children: List<Widget>.from(

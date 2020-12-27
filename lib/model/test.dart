@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'question_reference.dart';
 
 class Test {
-  final int id;
+  final String id;
   List<QuestionReference> questions;
   int currentQuestion;
   int correctTotal;
@@ -19,8 +19,8 @@ class Test {
   });
 
   Test copyWith({
-    int id,
-    List<QuestionReference> questions,
+    String id,
+    List<QuestionReference> questions = const [],
     int currentQuestion,
     int correctTotal,
     int answeredTotal,
@@ -50,7 +50,10 @@ class Test {
     return Test(
       id: map['id'],
       questions: List<QuestionReference>.from(
-          map['questions']?.map((x) => QuestionReference.fromMap(x))),
+        (map['questions'] ?? []).map(
+          (x) => QuestionReference.fromMap(x),
+        ),
+      ).toList(),
       currentQuestion: map['currentQuestion'],
       correctTotal: map['correctTotal'],
       answeredTotal: map['answeredTotal'],
