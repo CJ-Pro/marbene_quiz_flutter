@@ -1,5 +1,5 @@
 export 'multiple_choice.dart';
-export 'picture_multiple_choice.dart';
+export 'picture_test.dart';
 export 'theory.dart';
 
 enum QuestionCategory { multipleChoice, pictureTest, theory }

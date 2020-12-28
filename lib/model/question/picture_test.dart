@@ -1,20 +1,19 @@
 import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
 
 import 'question.dart';
 
-class PictureMultipleChoice extends Question {
+class PictureTest extends Question {
   final String question;
   final int answer;
   final List<String> choices;
   final String explanation;
-  PictureMultipleChoice({
-    id,
-    name,
-    subject,
-    system,
-    year,
+  PictureTest({
+    int id,
+    String name,
+    String subject,
+    String system,
+    int year,
     this.question,
     this.answer,
     this.choices,
@@ -30,7 +29,7 @@ class PictureMultipleChoice extends Question {
   @override
   QuestionCategory get category => QuestionCategory.pictureTest;
 
-  PictureMultipleChoice copyWith({
+  PictureTest copyWith({
     int answer,
     List<String> choices,
     String explanation,
@@ -41,7 +40,7 @@ class PictureMultipleChoice extends Question {
     String system,
     int year,
   }) {
-    return PictureMultipleChoice(
+    return PictureTest(
       answer: answer ?? this.answer,
       choices: choices ?? this.choices,
       explanation: explanation ?? this.explanation,
@@ -68,10 +67,10 @@ class PictureMultipleChoice extends Question {
     };
   }
 
-  factory PictureMultipleChoice.fromMap(Map<String, dynamic> map) {
+  factory PictureTest.fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
 
-    return PictureMultipleChoice(
+    return PictureTest(
       answer: map['answer'],
       choices: List<String>.from(
         List<Map>.from(map['choices'])
@@ -90,8 +89,8 @@ class PictureMultipleChoice extends Question {
 
   String toJson() => json.encode(toMap());
 
-  factory PictureMultipleChoice.fromJson(String source) =>
-      PictureMultipleChoice.fromMap(json.decode(source));
+  factory PictureTest.fromJson(String source) =>
+      PictureTest.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -102,7 +101,7 @@ class PictureMultipleChoice extends Question {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is PictureMultipleChoice &&
+    return o is PictureTest &&
         o.answer == answer &&
         listEquals(o.choices, choices) &&
         o.explanation == explanation &&

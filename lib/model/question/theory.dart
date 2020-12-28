@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
 
 import 'question.dart';
@@ -8,11 +7,11 @@ class Theory extends Question {
   final List<String> questions;
   final List<String> answers;
   Theory({
-    id,
-    name,
-    subject,
-    system,
-    year,
+    int id,
+    String name,
+    String subject,
+    String system,
+    int year,
     this.questions,
     this.answers,
   }) : super(

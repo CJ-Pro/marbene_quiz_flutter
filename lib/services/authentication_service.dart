@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
-import '../view/screens/login/login_screen.dart';
 
 class AuthenticationService extends GetxService {
   FirebaseAuth _auth = FirebaseAuth.instance;
@@ -58,8 +57,6 @@ class AuthenticationService extends GetxService {
       await _auth.signOut();
     } catch (e) {
       print(e);
-    } finally {
-      Get.offAll(LoginScreen());
-    }
+    } finally {}
   }
 }

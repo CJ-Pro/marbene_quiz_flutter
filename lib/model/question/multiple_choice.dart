@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
 
 import 'question.dart';
@@ -10,11 +9,11 @@ class MultipleChoice extends Question {
   final List<String> choices;
   final String explanation;
   MultipleChoice({
-    id,
-    name,
-    subject,
-    system,
-    year,
+    int id,
+    String name,
+    String subject,
+    String system,
+    int year,
     this.question,
     this.answer,
     this.choices,

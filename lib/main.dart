@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
 import 'package:marbene/services/database_service.dart';
-import 'package:marbene/view/screens/home/home_screen.dart';
-import 'package:marbene/view/screens/login/login_screen.dart';
 import 'services/authentication_service.dart';
 
 void main() async {
@@ -27,8 +25,8 @@ class MyApp extends StatelessWidget {
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         home: authService.user == null
-            ? LoginScreen()
-            : HomeScreen() //authService.user == null ? LoginScreen() : HomeScreen(),
+            ? Container()
+            : Container() //authService.user == null ? LoginScreen() : HomeScreen(),
         );
   }
 }
