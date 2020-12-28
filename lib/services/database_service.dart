@@ -6,7 +6,7 @@ class DatabaseService extends GetxService {
 
   DatabaseService() {
     this._database = FirebaseDatabase.instance;
-    _database.setPersistenceEnabled(false);
+    _database.setPersistenceEnabled(true);
   }
 
   DatabaseReference get ref => _database.reference();
