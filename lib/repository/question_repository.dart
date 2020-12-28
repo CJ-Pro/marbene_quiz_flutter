@@ -3,7 +3,7 @@ import 'package:marbene/services/database_service.dart';
 import '../model/question/question.dart';
 
 class QuestionRepository {
-  final _reference = Get.find<DatabaseService>().ref;
+  final _databaseService = Get.find<DatabaseService>();
 
   Future<Map<int, Question>> get getQuestions async {
     var multipleChoice = await _getMultipleChoice();
@@ -18,9 +18,8 @@ class QuestionRepository {
   }
 
   Future<Map<int, MultipleChoice>> _getMultipleChoice() async {
-    var multipleChoiceRef = _reference.child(_getPath('multipleChoice'));
-    multipleChoiceRef.keepSynced(true);
-    var snapshot = await multipleChoiceRef.once();
+    var snapshot =
+        await _databaseService.getSnapshot(_getPath("multipleChoice"));
     return Map.from(snapshot.value).map(
       (key, value) => MapEntry(
         key,
@@ -30,9 +29,7 @@ class QuestionRepository {
   }
 
   Future<Map<int, PictureTest>> _getPictureTest() async {
-    var pictureTestRef = _reference.child(_getPath('pictureTest'));
-    pictureTestRef.keepSynced(true);
-    var snapshot = await pictureTestRef.once();
+    var snapshot = await _databaseService.getSnapshot(_getPath("pictureTest"));
     return Map.from(snapshot.value).map(
       (key, value) => MapEntry(
         key,
@@ -42,9 +39,7 @@ class QuestionRepository {
   }
 
   Future<Map<int, Theory>> _getTheory() async {
-    var theoryRef = _reference.child(_getPath('theory'));
-    theoryRef.keepSynced(true);
-    var snapshot = await theoryRef.once();
+    var snapshot = await _databaseService.getSnapshot(_getPath("theory"));
     return Map.from(snapshot.value).map(
       (key, value) => MapEntry(
         key,

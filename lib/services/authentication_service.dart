@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import '../exceptions/authentication_exception.dart';
@@ -26,8 +28,8 @@ class AuthenticationService extends GetxService {
             'The account already exists for that email.');
       }
       throw AuthenticationException(e.message);
-    } catch (e) {
-      throw AuthenticationException(e.toString());
+    } on SocketException {
+      throw AuthenticationException("No Internet Connection.");
     }
   }
 
@@ -41,18 +43,17 @@ class AuthenticationService extends GetxService {
       } else if (e.code == 'wrong-password') {
         throw AuthenticationException('Wrong password provided for that user.');
       }
-
       throw AuthenticationException(e.message);
-    } catch (e) {
-      throw AuthenticationException(e.toString());
+    } on SocketException {
+      throw AuthenticationException("No Internet Connection.");
     }
   }
 
   void signOut() async {
     try {
       await _auth.signOut();
-    } catch (e) {
-      throw AuthenticationException(e.toString());
+    } on SocketException {
+      throw AuthenticationException("No Internet Connection.");
     }
   }
 }
