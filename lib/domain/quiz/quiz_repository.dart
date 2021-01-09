@@ -20,5 +20,10 @@ class QuizRepository {
     return Quiz.fromMap(snapshot.value);
   }
 
-  Future<void> _createQuiz(List<Question> questions) async {}
+  Future<void> _createQuiz(List<Question> questions) async {
+    for (final question in questions) {
+      await _databaseService.setData(
+          _quizPath, question.blankAssessment.toMap());
+    }
+  }
 }
