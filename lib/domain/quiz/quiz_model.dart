@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 
-import '../assessment/assessment.dart';
+import '../../model/assessment/assessment.dart';
 
 class Quiz {
   final int id;
@@ -12,6 +12,7 @@ class Quiz {
   bool _isTimed;
   bool _isTutored;
   int _timeLeftInSeconds;
+  int _timeCreated;
   Quiz({
     this.id,
     this.assessments,
@@ -20,11 +21,13 @@ class Quiz {
     bool isTimed = false,
     bool isTutored = true,
     int timeLeftInSeconds,
+    int timeCreated,
   })  : _isComplete = isComplete,
         _currentAssessmentIndex = currentAssessmentIndex,
         _isTimed = isTimed,
         _isTutored = isTutored,
-        _timeLeftInSeconds = timeLeftInSeconds ?? 0;
+        _timeLeftInSeconds = timeLeftInSeconds ?? 0,
+        _timeCreated = timeCreated;
 
   Map<String, dynamic> toMap() {
     return {
@@ -35,6 +38,7 @@ class Quiz {
       'isTimed': _isTimed,
       'isTutored': _isTutored,
       'timeLeftInSeconds': _timeLeftInSeconds,
+      'timeCreated': _timeCreated,
     };
   }
 
@@ -42,15 +46,15 @@ class Quiz {
     if (map == null) return null;
 
     return Quiz(
-      id: map['id'],
-      assessments: List<Assessment>.from(
-          map['assessments']?.map((x) => Assessment.fromMap(x))),
-      currentAssessmentIndex: map['_currentAssessmentIndex'],
-      isComplete: map['isComplete'],
-      isTimed: map['isTimed'],
-      isTutored: map['isTutored'],
-      timeLeftInSeconds: map['timeLeftInSeconds'],
-    );
+        id: map['id'],
+        assessments: List<Assessment>.from(
+            map['assessments']?.map((x) => Assessment.fromMap(x))),
+        currentAssessmentIndex: map['_currentAssessmentIndex'],
+        isComplete: map['isComplete'],
+        isTimed: map['isTimed'],
+        isTutored: map['isTutored'],
+        timeLeftInSeconds: map['timeLeftInSeconds'],
+        timeCreated: map['timeCreated']);
   }
 
   String toJson() => json.encode(toMap());
