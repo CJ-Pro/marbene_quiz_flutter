@@ -11,19 +11,25 @@ class QuizRepository {
 
   String get _quizPath => 'flamelink/quiz/$_userId/';
 
-  Future<Quiz> getOrCreateQuiz(List<Question> questions) async {
-    var snapshot = await _databaseService.getSnapshot(_quizPath);
-    if (snapshot.value.isNullOrBlank) {
-      await _createQuiz(questions);
-      snapshot = await _databaseService.getSnapshot(_quizPath);
-    }
-    return Quiz.fromMap(snapshot.value);
+  Future<void> createQuiz(List<Question> questions) async {
+    final assesments = questions
+        .map((question) => question.blankAssessment)
+        .toList()
+          ..shuffle(); // Shuufle assesments for variability
+    final creationTimeStamp = DateTime.now().millisecondsSinceEpoch;
+    final quiz = Quiz(
+      id: creationTimeStamp,
+      assessments: assesments,
+    );
+    await _databaseService.setData(_quizPath, creationTimeStamp, quiz.toMap());
+    return quiz;
   }
 
-  Future<void> _createQuiz(List<Question> questions) async {
-    for (final question in questions) {
-      await _databaseService.setData(
-          _quizPath, question.blankAssessment.toMap());
-    }
+  Future<List<Quiz>> getPreviousQuiz() async {
+    final snapshot = await _databaseService.getSnapshot(_quizPath);
+    return Map<String, dynamic>.from(snapshot.value)
+        .values
+        .map((map) => Quiz.fromMap(map))
+        .toList();
   }
 }

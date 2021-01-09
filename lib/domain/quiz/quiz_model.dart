@@ -12,7 +12,6 @@ class Quiz {
   bool _isTimed;
   bool _isTutored;
   int _timeLeftInSeconds;
-  int _timeCreated;
   Quiz({
     this.id,
     this.assessments,
@@ -21,13 +20,11 @@ class Quiz {
     bool isTimed = false,
     bool isTutored = true,
     int timeLeftInSeconds,
-    int timeCreated,
   })  : _isComplete = isComplete,
         _currentAssessmentIndex = currentAssessmentIndex,
         _isTimed = isTimed,
         _isTutored = isTutored,
-        _timeLeftInSeconds = timeLeftInSeconds ?? 0,
-        _timeCreated = timeCreated;
+        _timeLeftInSeconds = timeLeftInSeconds ?? 0;
 
   Map<String, dynamic> toMap() {
     return {
@@ -38,7 +35,6 @@ class Quiz {
       'isTimed': _isTimed,
       'isTutored': _isTutored,
       'timeLeftInSeconds': _timeLeftInSeconds,
-      'timeCreated': _timeCreated,
     };
   }
 
@@ -46,15 +42,15 @@ class Quiz {
     if (map == null) return null;
 
     return Quiz(
-        id: map['id'],
-        assessments:
-            List<Assessment>.from(map['assessments']?.map(Assessment.fromMap)),
-        currentAssessmentIndex: map['_currentAssessmentIndex'],
-        isComplete: map['isComplete'],
-        isTimed: map['isTimed'],
-        isTutored: map['isTutored'],
-        timeLeftInSeconds: map['timeLeftInSeconds'],
-        timeCreated: map['timeCreated']);
+      id: map['id'],
+      assessments:
+          List<Assessment>.from(map['assessments']?.map(Assessment.fromMap)),
+      currentAssessmentIndex: map['_currentAssessmentIndex'],
+      isComplete: map['isComplete'],
+      isTimed: map['isTimed'],
+      isTutored: map['isTutored'],
+      timeLeftInSeconds: map['timeLeftInSeconds'],
+    );
   }
 
   String toJson() => json.encode(toMap());
