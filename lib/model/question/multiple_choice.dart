@@ -125,4 +125,8 @@ class MultipleChoice extends Question {
         system.hashCode ^
         year.hashCode;
   }
+
+  @override
+  Assessment get blankAssessment =>
+      MultipleChoiceAssessment.fromMap({'id': id});
 }

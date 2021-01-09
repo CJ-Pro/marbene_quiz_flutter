@@ -111,4 +111,7 @@ class Theory extends Question {
         name.hashCode ^
         id.hashCode;
   }
+
+  @override
+  Assessment get blankAssessment => TheoryAssessment.fromMap({'id': id});
 }

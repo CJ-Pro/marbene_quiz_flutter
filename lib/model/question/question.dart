@@ -1,3 +1,5 @@
+import '../assessment/assessment.dart';
+export '../assessment/assessment.dart';
 export 'multiple_choice.dart';
 export 'picture_test.dart';
 export 'theory.dart';
@@ -19,4 +21,6 @@ abstract class Question {
   final int id;
   final String name;
   final int year;
+
+  Assessment get blankAssessment;
 }

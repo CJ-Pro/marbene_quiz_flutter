@@ -20,7 +20,5 @@ class QuizRepository {
     return Quiz.fromMap(snapshot.value);
   }
 
-  Future<void> _createQuiz(List<Question> questions) async {
-    //TODO Key Timestamp with Quiz intial reference set
-  }
+  Future<void> _createQuiz(List<Question> questions) async {}
 }
