@@ -21,4 +21,13 @@ class DatabaseService extends GetxService {
       throw DatabaseException(e.message);
     }
   }
+
+  Future<void> setData(String path, dynamic value) async {
+    try {
+      var reference = _ref.child(path);
+      reference.push().set(value);
+    } on DatabaseError catch (e) {
+      throw DatabaseException(e.message);
+    }
+  }
 }
