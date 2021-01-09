@@ -22,10 +22,10 @@ class DatabaseService extends GetxService {
     }
   }
 
-  Future<void> setData(String path, dynamic value) async {
+  Future<void> setData(String path, int key, Map<String, dynamic> value) async {
     try {
       final reference = _ref.child(path);
-      await reference.push().set(value);
+      await reference.child(key.toString()).set(value);
     } on DatabaseError catch (e) {
       throw DatabaseException(e.message);
     }

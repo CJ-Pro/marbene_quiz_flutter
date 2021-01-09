@@ -22,7 +22,7 @@ class QuestionRepository {
         await _databaseService.getSnapshot(_getPath('multipleChoice'));
     return Map.from(snapshot.value).map(
       (key, value) => MapEntry(
-        key,
+        int.parse(key),
         MultipleChoice.fromMap(Map<String, dynamic>.from(value)),
       ),
     );
@@ -33,7 +33,7 @@ class QuestionRepository {
         await _databaseService.getSnapshot(_getPath('pictureTest'));
     return Map.from(snapshot.value).map(
       (key, value) => MapEntry(
-        key,
+        int.parse(key),
         PictureTest.fromMap(Map<String, dynamic>.from(value)),
       ),
     );
@@ -43,7 +43,7 @@ class QuestionRepository {
     final snapshot = await _databaseService.getSnapshot(_getPath('theory'));
     return Map.from(snapshot.value).map(
       (key, value) => MapEntry(
-        key,
+        int.parse(key),
         Theory.fromMap(Map<String, dynamic>.from(value)),
       ),
     );
