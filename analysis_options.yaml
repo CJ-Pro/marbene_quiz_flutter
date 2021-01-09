@@ -1,0 +1,9 @@
+include: package:very_good_analysis/analysis_options.yaml
+
+linter:
+  rules:
+    public_member_api_docs: false
+    sort_constructors_first: false
+    lines_longer_than_80_chars: false
+    avoid_renaming_method_parameters: false
+    always_declare_return_types: false
