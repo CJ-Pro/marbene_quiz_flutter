@@ -5,8 +5,8 @@ import 'package:get/get.dart';
 import '../exceptions/authentication_exception.dart';
 
 class AuthenticationService extends GetxService {
-  FirebaseAuth _auth = FirebaseAuth.instance;
-  Rx<User> _user = Rx<User>();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final Rx<User> _user = Rx<User>();
 
   @override
   onInit() {
@@ -30,7 +30,7 @@ class AuthenticationService extends GetxService {
       }
       throw AuthenticationException(e.message);
     } on SocketException {
-      throw AuthenticationException("No Internet Connection.");
+      throw AuthenticationException('No Internet Connection.');
     }
   }
 
@@ -47,7 +47,7 @@ class AuthenticationService extends GetxService {
       }
       throw AuthenticationException(e.message);
     } on SocketException {
-      throw AuthenticationException("No Internet Connection.");
+      throw AuthenticationException('No Internet Connection.');
     }
   }
 
@@ -55,7 +55,7 @@ class AuthenticationService extends GetxService {
     try {
       await _auth.signOut();
     } on SocketException {
-      throw AuthenticationException("No Internet Connection.");
+      throw AuthenticationException('No Internet Connection.');
     }
   }
 }

@@ -22,8 +22,9 @@ class TheoryAssessment extends Assessment {
   bool get flagged => _isFlagged;
 
   @override
-  get solution => _answers;
+  List<String> get solution => _answers;
 
+  @override
   Map<String, dynamic> toMap() {
     return {
       'id': id,

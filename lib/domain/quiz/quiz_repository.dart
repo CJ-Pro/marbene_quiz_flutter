@@ -1,15 +1,15 @@
 import 'package:get/get.dart';
 
 import '../../model/question/question.dart';
-import 'quiz_model.dart';
 import '../../services/authentication_service.dart';
 import '../../services/database_service.dart';
+import 'quiz_model.dart';
 
 class QuizRepository {
   final _databaseService = Get.find<DatabaseService>();
   final _userId = Get.find<AuthenticationService>().user.uid;
 
-  String get _quizPath => "flamelink/quiz/$_userId/";
+  String get _quizPath => 'flamelink/quiz/$_userId/';
 
   Future<Quiz> getOrCreateQuiz(List<Question> questions) async {
     var snapshot = await _databaseService.getSnapshot(_quizPath);

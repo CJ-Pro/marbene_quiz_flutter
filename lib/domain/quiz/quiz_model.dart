@@ -47,8 +47,8 @@ class Quiz {
 
     return Quiz(
         id: map['id'],
-        assessments: List<Assessment>.from(
-            map['assessments']?.map((x) => Assessment.fromMap(x))),
+        assessments:
+            List<Assessment>.from(map['assessments']?.map(Assessment.fromMap)),
         currentAssessmentIndex: map['_currentAssessmentIndex'],
         isComplete: map['isComplete'],
         isTimed: map['isTimed'],
@@ -67,6 +67,7 @@ class Quiz {
   }
 
   @override
+  // ignore: avoid_renaming_method_parameters
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 

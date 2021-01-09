@@ -9,11 +9,4 @@ abstract class Assessment {
   Map<String, dynamic> toMap();
   static fromMap(x) {}
   Assessment(this.id);
-
-  Map<String, dynamic> get initial {
-    return {
-      "id": id,
-      "flagged": false,
-    };
-  }
 }

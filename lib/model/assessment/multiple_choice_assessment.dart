@@ -22,8 +22,9 @@ class MultipleChoiceAssessment extends Assessment {
   bool get flagged => _isFlagged;
 
   @override
-  get solution => _answer;
+  int get solution => _answer;
 
+  @override
   Map<String, dynamic> toMap() {
     return {
       'id': id,

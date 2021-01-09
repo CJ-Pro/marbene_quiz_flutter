@@ -7,8 +7,7 @@ import 'services/authentication_service.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  Get.lazyPut(() => AuthenticationService());
-  Get.lazyPut(() => DatabaseService());
+  Get..lazyPut(() => AuthenticationService())..lazyPut(() => DatabaseService());
   runApp(MyApp());
 }
 

@@ -7,14 +7,14 @@ class DatabaseService extends GetxService {
   DatabaseReference _ref;
 
   DatabaseService() {
-    this._database = FirebaseDatabase.instance;
-    this._ref = _database.reference();
+    _database = FirebaseDatabase.instance;
+    _ref = _database.reference();
     _database.setPersistenceEnabled(true);
   }
 
   Future<DataSnapshot> getSnapshot(String path) async {
-    var reference = _ref.child(path);
-    reference.keepSynced(true);
+    final reference = _ref.child(path);
+    await reference.keepSynced(true);
     try {
       return await reference.once();
     } on DatabaseError catch (e) {
@@ -24,8 +24,8 @@ class DatabaseService extends GetxService {
 
   Future<void> setData(String path, dynamic value) async {
     try {
-      var reference = _ref.child(path);
-      reference.push().set(value);
+      final reference = _ref.child(path);
+      await reference.push().set(value);
     } on DatabaseError catch (e) {
       throw DatabaseException(e.message);
     }
