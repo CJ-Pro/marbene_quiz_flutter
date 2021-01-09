@@ -16,7 +16,8 @@ class AuthenticationService extends GetxService {
 
   User get user => _user.value;
 
-  void registerWithEmailAndPassword({String email, String password}) async {
+  Future<void> registerWithEmailAndPassword(
+      {String email, String password}) async {
     try {
       await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
@@ -33,7 +34,8 @@ class AuthenticationService extends GetxService {
     }
   }
 
-  void signInWithEmailAndPassword({String email, String password}) async {
+  Future<void> signInWithEmailAndPassword(
+      {String email, String password}) async {
     try {
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
@@ -49,7 +51,7 @@ class AuthenticationService extends GetxService {
     }
   }
 
-  void signOut() async {
+  Future<void> signOut() async {
     try {
       await _auth.signOut();
     } on SocketException {
