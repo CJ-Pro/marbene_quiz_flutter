@@ -6,14 +6,17 @@ class TheoryAssessment extends Assessment {
   bool _isCorrect;
   bool _isFlagged;
   List<String> _answers;
+  int _creationTimeStamp;
   TheoryAssessment({
     String id,
     bool isCorrect,
     bool isFlagged = false,
     List<String> answers,
+    int creationTimeStamp,
   })  : _isCorrect = isCorrect,
         _isFlagged = isFlagged,
         _answers = answers,
+        _creationTimeStamp = creationTimeStamp,
         super(id);
   @override
   bool get correct => _isCorrect;
@@ -25,12 +28,16 @@ class TheoryAssessment extends Assessment {
   List<String> get solution => _answers;
 
   @override
+  int get creationTimeStamp => _creationTimeStamp;
+
+  @override
   Map<String, dynamic> toMap() {
     return {
       'id': id,
       'isCorrect': _isCorrect,
       'isFlagged': _isFlagged,
       'answers': _answers,
+      'creationTimeStamp': creationTimeStamp,
     };
   }
 
@@ -42,6 +49,7 @@ class TheoryAssessment extends Assessment {
       isCorrect: map['isCorrect'],
       isFlagged: map['isFlagged'],
       answers: map['answers'],
+      creationTimeStamp: map['creationTimeStamp'],
     );
   }
 
