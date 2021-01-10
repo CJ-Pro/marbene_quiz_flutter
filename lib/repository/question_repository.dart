@@ -5,7 +5,7 @@ import '../model/question/question.dart';
 class QuestionRepository {
   final _databaseService = Get.find<DatabaseService>();
 
-  Future<Map<int, Question>> get getQuestions async {
+  Future<Map<String, Question>> get getQuestions async {
     final multipleChoice = await _getMultipleChoice();
     final pictureTest = await _getPictureTest();
     final theory = await _getTheory();
@@ -17,33 +17,33 @@ class QuestionRepository {
     return questions[id];
   }
 
-  Future<Map<int, MultipleChoice>> _getMultipleChoice() async {
+  Future<Map<String, MultipleChoice>> _getMultipleChoice() async {
     final snapshot =
         await _databaseService.getSnapshot(_getPath('multipleChoice'));
     return Map.from(snapshot.value).map(
       (key, value) => MapEntry(
-        int.parse(key),
+        key,
         MultipleChoice.fromMap(Map<String, dynamic>.from(value)),
       ),
     );
   }
 
-  Future<Map<int, PictureTest>> _getPictureTest() async {
+  Future<Map<String, PictureTest>> _getPictureTest() async {
     final snapshot =
         await _databaseService.getSnapshot(_getPath('pictureTest'));
     return Map.from(snapshot.value).map(
       (key, value) => MapEntry(
-        int.parse(key),
+        key,
         PictureTest.fromMap(Map<String, dynamic>.from(value)),
       ),
     );
   }
 
-  Future<Map<int, Theory>> _getTheory() async {
+  Future<Map<String, Theory>> _getTheory() async {
     final snapshot = await _databaseService.getSnapshot(_getPath('theory'));
     return Map.from(snapshot.value).map(
       (key, value) => MapEntry(
-        int.parse(key),
+        key,
         Theory.fromMap(Map<String, dynamic>.from(value)),
       ),
     );

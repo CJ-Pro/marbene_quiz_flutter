@@ -7,7 +7,7 @@ class Theory extends Question {
   final List<String> questions;
   final List<String> answers;
   Theory({
-    int id,
+    String id,
     String name,
     String subject,
     String system,
@@ -31,7 +31,7 @@ class Theory extends Question {
     String system,
     int year,
     String name,
-    int id,
+    String id,
   }) {
     return Theory(
       questions: questions ?? this.questions,

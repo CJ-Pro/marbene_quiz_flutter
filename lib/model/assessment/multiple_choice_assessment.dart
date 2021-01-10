@@ -7,7 +7,7 @@ class MultipleChoiceAssessment extends Assessment {
   bool _isFlagged;
   int _answer;
   MultipleChoiceAssessment({
-    int id,
+    String id,
     bool isCorrect,
     bool isFlagged = false,
     int answer,

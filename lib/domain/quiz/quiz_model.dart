@@ -42,7 +42,7 @@ class Quiz {
     if (map == null) return null;
 
     return Quiz(
-      id: map['id'],
+      id: int.parse(map['id']),
       assessments:
           List<Assessment>.from(map['assessments']?.map(Assessment.fromMap)),
       currentAssessmentIndex: map['_currentAssessmentIndex'],
