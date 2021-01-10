@@ -6,7 +6,6 @@ abstract class Assessment {
   dynamic get solution;
   bool get flagged;
   bool get correct;
-  int get creationTimeStamp;
   Map<String, dynamic> toMap();
   static fromMap(x) {}
   Assessment(this.id);

@@ -22,7 +22,8 @@ class DatabaseService extends GetxService {
     }
   }
 
-  Future<void> setData(String path, int key, Map<String, dynamic> value) async {
+  Future<void> setData(
+      String path, String key, Map<String, dynamic> value) async {
     try {
       final reference = _ref.child(path);
       await reference.child(key.toString()).set(value);

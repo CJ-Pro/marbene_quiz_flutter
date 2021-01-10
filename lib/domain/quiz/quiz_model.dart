@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 import '../../model/assessment/assessment.dart';
 
 class Quiz {
-  final int id;
+  final String id;
   final List<Assessment> assessments;
   int _currentAssessmentIndex;
   bool _isComplete;
@@ -42,7 +42,7 @@ class Quiz {
     if (map == null) return null;
 
     return Quiz(
-      id: int.parse(map['id']),
+      id: map['id'],
       assessments:
           List<Assessment>.from(map['assessments']?.map(Assessment.fromMap)),
       currentAssessmentIndex: map['_currentAssessmentIndex'],
