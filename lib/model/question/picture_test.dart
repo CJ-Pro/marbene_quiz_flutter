@@ -9,7 +9,7 @@ class PictureTest extends Question {
   final List<String> choices;
   final String explanation;
   PictureTest({
-    String id,
+    int id,
     String name,
     String subject,
     String system,

@@ -7,7 +7,7 @@ class TheoryAssessment extends Assessment {
   bool _isFlagged;
   List<String> _answers;
   TheoryAssessment({
-    String id,
+    int id,
     bool isCorrect,
     bool isFlagged = false,
     List<String> answers,

@@ -10,19 +10,20 @@ import 'quiz_service.dart';
 class QuizViewModel extends GetxController {
   final _quizService = Get.put(QuizService());
   final _questionRepository = Get.put(QuestionRepository());
-  Map<String, Question> _questions;
+  Map<int, Question> _questions;
   final _isLoading = true.obs;
 
   @override
   void onInit() {
-    loadQuestions();
+    _loadQuestions();
     super.onInit();
   }
 
-  Future<void> loadQuestions() async {
+  Future<void> _loadQuestions() async {
     _isLoading(true);
     try {
       _questions = await _questionRepository.getQuestions;
+      await _quizService.createQuiz(_questions.values.take(10).toList());
     } on DatabaseException catch (e) {
       Get.snackbar(
         'Error connecting to Database',
@@ -51,6 +52,6 @@ class QuizViewModel extends GetxController {
     return [];
   }
 
-  Map<String, Question> get questions => _questions;
+  Map<int, Question> get questions => _questions;
   bool get isLoading => _isLoading.value;
 }

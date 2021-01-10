@@ -2,7 +2,7 @@ export 'multiple_choice_assessment.dart';
 export 'theory_assessment.dart';
 
 abstract class Assessment {
-  final String id;
+  final int id;
   dynamic get solution;
   bool get flagged;
   bool get correct;

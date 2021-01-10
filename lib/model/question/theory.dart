@@ -7,7 +7,7 @@ class Theory extends Question {
   final List<String> questions;
   final List<String> answers;
   Theory({
-    String id,
+    int id,
     String name,
     String subject,
     String system,

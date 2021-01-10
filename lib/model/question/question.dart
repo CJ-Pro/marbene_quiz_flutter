@@ -18,7 +18,7 @@ abstract class Question {
   QuestionCategory get category;
   final String system;
   final String subject;
-  final String id;
+  final int id;
   final String name;
   final int year;
 

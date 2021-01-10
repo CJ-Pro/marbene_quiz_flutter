@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 import '../../model/assessment/assessment.dart';
 
 class Quiz {
-  final String id;
+  final int id;
   final List<Assessment> assessments;
   int _currentAssessmentIndex;
   bool _isComplete;

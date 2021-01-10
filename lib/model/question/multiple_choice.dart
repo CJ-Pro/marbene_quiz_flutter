@@ -9,7 +9,7 @@ class MultipleChoice extends Question {
   final List<String> choices;
   final String explanation;
   MultipleChoice({
-    String id,
+    int id,
     String name,
     String subject,
     String system,

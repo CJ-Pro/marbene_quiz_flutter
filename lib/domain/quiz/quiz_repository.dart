@@ -16,7 +16,7 @@ class QuizRepository {
         .map((question) => question.blankAssessment)
         .toList()
           ..shuffle(); // Shuufle assesments for variability
-    final creationTimeStamp = DateTime.now().millisecondsSinceEpoch.toString();
+    final creationTimeStamp = DateTime.now().millisecondsSinceEpoch;
     final quiz = Quiz(
       id: creationTimeStamp,
       assessments: assesments,
