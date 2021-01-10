@@ -27,7 +27,7 @@ class QuizRepository {
 
   Future<List<Quiz>> getPreviousQuiz() async {
     final snapshot = await _databaseService.getSnapshot(_quizPath);
-    return Map<String, Map>.from(snapshot.value)
+    return Map<String, dynamic>.from(snapshot.value)
         .values
         .map((map) => Quiz.fromMap(Map<String, dynamic>.from(map)))
         .toList();

@@ -23,7 +23,6 @@ class QuizViewModel extends GetxController {
     _isLoading(true);
     try {
       _questions = await _questionRepository.getQuestions;
-      await _quizService.createQuiz(_questions.values.take(10).toList());
     } on DatabaseException catch (e) {
       Get.snackbar(
         'Error connecting to Database',
@@ -38,8 +37,7 @@ class QuizViewModel extends GetxController {
   Future<List<Quiz>> getPreviousQuiz() async {
     _isLoading(true);
     try {
-      final x = await _quizService.getPreviousQuizSortedByTimestamp();
-      return x;
+      return await _quizService.getPreviousQuizSortedByTimestamp();
     } on DatabaseException catch (e) {
       Get.snackbar(
         'Error connecting to Database',
