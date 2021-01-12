@@ -23,6 +23,9 @@ abstract class Assessment {
   ///Map representation of assessment
   Map<String, dynamic> toMap();
 
+  ///If the particular assessment has been answered.
+  bool get isSubmitted => solution != null;
+
   ///A quiz assessment
   Assessment(this.questionId, this.category);
 }
