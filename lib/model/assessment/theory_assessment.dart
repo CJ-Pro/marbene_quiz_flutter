@@ -37,7 +37,7 @@ class TheoryAssessment extends Assessment {
     };
   }
 
-  factory TheoryAssessment.fromMap(Map<String, dynamic> map) {
+  factory TheoryAssessment.fromMap(map) {
     if (map == null) return null;
 
     return TheoryAssessment(
@@ -63,5 +63,5 @@ class TheoryAssessment extends Assessment {
   int get hashCode => questionId.hashCode;
 
   @override
-  int get timeGivenInSeconds => throw UnimplementedError();
+  int get timeGivenInSeconds => 60;
 }

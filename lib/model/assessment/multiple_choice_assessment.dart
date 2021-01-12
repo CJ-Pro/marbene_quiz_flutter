@@ -36,7 +36,7 @@ class MultipleChoiceAssessment extends Assessment {
     };
   }
 
-  factory MultipleChoiceAssessment.fromMap(Map<String, dynamic> map) {
+  factory MultipleChoiceAssessment.fromMap(map) {
     if (map == null) return null;
 
     return MultipleChoiceAssessment(
@@ -62,5 +62,5 @@ class MultipleChoiceAssessment extends Assessment {
   int get hashCode => questionId.hashCode;
 
   @override
-  int get timeGivenInSeconds => throw UnimplementedError();
+  int get timeGivenInSeconds => 30;
 }

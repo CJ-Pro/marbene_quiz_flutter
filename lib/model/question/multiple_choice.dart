@@ -111,5 +111,8 @@ class MultipleChoice extends Question {
   }
 
   @override
-  Assessment get newAssessment => MultipleChoiceAssessment(questionId: id);
+  Assessment get newAssessment => MultipleChoiceAssessment(
+        questionId: id,
+        category: category,
+      );
 }

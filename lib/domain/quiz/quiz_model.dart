@@ -80,11 +80,20 @@ class Quiz {
     return Quiz(
       id: map['id'],
       assessments: List<Assessment>.from(
-        map['assessments']?.map(
-          (assessment) => _getAssessment(
-            Map<String, dynamic>.from(assessment),
-          ),
-        ),
+        map['assessments']?.map((assessment) {
+          final category =
+              (assessment['category'] as String).toQuestionCategory;
+          switch (category) {
+            case QuestionCategory.multipleChoice:
+              return MultipleChoiceAssessment.fromMap(assessment);
+            case QuestionCategory.pictureTest:
+              return MultipleChoiceAssessment.fromMap(assessment);
+            case QuestionCategory.theory:
+              return TheoryAssessment.fromMap(assessment);
+            default:
+              return null;
+          }
+        }),
       ),
       index: map['index'],
       isComplete: map['isComplete'],
@@ -92,20 +101,6 @@ class Quiz {
       isTutored: map['isTutored'],
       timeLeftInSeconds: map['timeLeftInSeconds'],
     );
-  }
-
-  Assessment _getAssessment(Map<String, dynamic> assessment) {
-    final category = (assessment['category'] as String).toQuestionCategory;
-    switch (category) {
-      case QuestionCategory.multipleChoice:
-        return MultipleChoiceAssessment.fromMap(assessment);
-      case QuestionCategory.pictureTest:
-        return MultipleChoiceAssessment.fromMap(assessment);
-      case QuestionCategory.theory:
-        return TheoryAssessment.fromMap(assessment);
-      default:
-        return null;
-    }
   }
 
   String toJson() => json.encode(toMap());

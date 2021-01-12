@@ -101,5 +101,8 @@ class Theory extends Question {
   }
 
   @override
-  Assessment get newAssessment => TheoryAssessment(questionId: id);
+  Assessment get newAssessment => TheoryAssessment(
+        questionId: id,
+        category: category,
+      );
 }
