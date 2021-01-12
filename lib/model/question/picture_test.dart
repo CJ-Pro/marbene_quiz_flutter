@@ -109,4 +109,7 @@ class PictureTest extends Question {
   int get hashCode {
     return id.hashCode;
   }
+
+  @override
+  Assessment get newAssessment => MultipleChoiceAssessment(questionId: id);
 }

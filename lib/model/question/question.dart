@@ -1,11 +1,13 @@
 import 'package:meta/meta.dart';
 
+import '../assessment/assessment.dart';
+import 'category_enum.dart';
+
 export '../assessment/assessment.dart';
+export 'category_enum.dart';
 export 'multiple_choice.dart';
 export 'picture_test.dart';
 export 'theory.dart';
-
-enum QuestionCategory { multipleChoice, pictureTest, theory }
 
 @immutable
 abstract class Question {
@@ -18,11 +20,10 @@ abstract class Question {
   });
 
   QuestionCategory get category;
+  Assessment get newAssessment;
   final String system;
   final String subject;
   final int id;
   final String name;
   final int year;
-
-  Map<String, dynamic> get blankAssessment => {'id': id};
 }

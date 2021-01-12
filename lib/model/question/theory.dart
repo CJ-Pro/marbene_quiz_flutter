@@ -99,4 +99,7 @@ class Theory extends Question {
   int get hashCode {
     return id.hashCode;
   }
+
+  @override
+  Assessment get newAssessment => TheoryAssessment(questionId: id);
 }
