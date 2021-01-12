@@ -22,10 +22,9 @@ class QuizRepository {
       assessments: assesments,
     );
     await _databaseService.setData(_quizPath, creationTimeStamp, quiz.toMap());
-    return quiz;
   }
 
-  Future<List<Quiz>> getPreviousQuiz() async {
+  Future<List<Quiz>> getAllPreviousQuiz() async {
     final snapshot = await _databaseService.getSnapshot(_quizPath);
     return Map<String, dynamic>.from(snapshot.value)
         .values

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../quiz_viewmodel.dart';
 
-class CreateQuiz extends StatelessWidget {
-  const CreateQuiz({Key key}) : super(key: key);
+class CreateQuizPage extends StatelessWidget {
+  const CreateQuizPage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

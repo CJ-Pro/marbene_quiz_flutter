@@ -1,9 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:marbene/domain/quiz/pages/create_quiz/create_quiz.dart';
+import 'package:marbene/domain/quiz/pages/create_quiz/create_quiz_page.dart';
 
-import 'domain/quiz/pages/previous_quiz/previous_quiz.dart';
+import 'domain/quiz/pages/previous_quiz/previous_quiz_page.dart';
 import 'services/authentication_service.dart';
 import 'services/database_service.dart';
 
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.grey,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: authService.user == null ? Container() : const CreateQuiz(),
+      home: authService.user == null ? Container() : const PreviousQuizPage(),
     );
   }
 }

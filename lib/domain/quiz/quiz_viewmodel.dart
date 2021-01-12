@@ -37,7 +37,7 @@ class QuizViewModel extends GetxController {
   Future<List<Quiz>> getPreviousQuiz() async {
     _isLoading(true);
     try {
-      return await _quizService.getPreviousQuizSortedByTimestamp();
+      return await _quizService.getAllPreviousQuizSortedByTimestamp();
     } on DatabaseException catch (e) {
       Get.snackbar(
         'Error connecting to Database',

@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:marbene/domain/quiz/quiz_model.dart';
 import '../../quiz_viewmodel.dart';
 
-class PreviousQuiz extends StatelessWidget {
-  const PreviousQuiz({Key key}) : super(key: key);
+class PreviousQuizPage extends StatelessWidget {
+  const PreviousQuizPage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

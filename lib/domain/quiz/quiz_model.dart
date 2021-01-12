@@ -1,12 +1,8 @@
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
-
-import '../../model/assessment/assessment.dart';
-
 class Quiz {
   final int id;
-  final List<Assessment> assessments;
+  final List<Map<String, dynamic>> assessments;
   int _currentAssessmentIndex;
   bool _isComplete;
   bool _isTimed;
@@ -29,7 +25,7 @@ class Quiz {
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'assessments': assessments?.map((x) => x?.toMap())?.toList(),
+      'assessments': assessments,
       'currentAssessmentIndex': _currentAssessmentIndex,
       'isComplete': _isComplete,
       'isTimed': _isTimed,
@@ -40,11 +36,11 @@ class Quiz {
 
   factory Quiz.fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
-
     return Quiz(
       id: map['id'],
-      assessments:
-          List<Assessment>.from(map['assessments']?.map(Assessment.fromMap)),
+      assessments: List.from(map['assessments'])
+          ?.map((assessment) => Map<String, dynamic>.from(assessment))
+          ?.toList(),
       currentAssessmentIndex: map['_currentAssessmentIndex'],
       isComplete: map['isComplete'],
       isTimed: map['isTimed'],
@@ -66,24 +62,11 @@ class Quiz {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is Quiz &&
-        o.id == id &&
-        listEquals(o.assessments, assessments) &&
-        o._currentAssessmentIndex == _currentAssessmentIndex &&
-        o._isComplete == _isComplete &&
-        o._isTimed == _isTimed &&
-        o._isTutored == _isTutored &&
-        o._timeLeftInSeconds == _timeLeftInSeconds;
+    return o is Quiz && o.id == id;
   }
 
   @override
   int get hashCode {
-    return id.hashCode ^
-        assessments.hashCode ^
-        _currentAssessmentIndex.hashCode ^
-        _isComplete.hashCode ^
-        _isTimed.hashCode ^
-        _isTutored.hashCode ^
-        _timeLeftInSeconds.hashCode;
+    return id.hashCode;
   }
 }
