@@ -1,52 +1,111 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
+import 'package:meta/meta.dart';
+
+import '../../model/assessment/assessment.dart';
+
+@immutable
 class Quiz {
+  ///Quiz id generated using creation timestamp.
   final int id;
-  final List<Map<String, dynamic>> assessments;
-  int _currentAssessmentIndex;
-  bool _isComplete;
-  bool _isTimed;
-  bool _isTutored;
-  int _timeLeftInSeconds;
+
+  ///Assessments list keep reference to questions.
+  final List<Assessment> assessments;
+
+  ///The index of the current assessment.
+  final int index;
+
+  ///If the quiz is completed.
+  final bool isComplete;
+
+  ///If the quiz is timed.
+  final bool isTimed;
+
+  //If the quiz shows corrections after an assessment is answered.
+  final bool isTutored;
+
+  ///Time left in seconds if the quiz is timed.
+  final int timeLeftInSeconds;
   Quiz({
     this.id,
     this.assessments,
-    bool isComplete = false,
-    int currentAssessmentIndex = 0,
-    bool isTimed = false,
-    bool isTutored = true,
+    this.index,
+    this.isComplete,
+    this.isTimed,
+    this.isTutored,
     int timeLeftInSeconds,
-  })  : _isComplete = isComplete,
-        _currentAssessmentIndex = currentAssessmentIndex,
-        _isTimed = isTimed,
-        _isTutored = isTutored,
-        _timeLeftInSeconds = timeLeftInSeconds ?? 0;
+  }) :
+        //The time is calculated by summing the time given for each assessment.
+        timeLeftInSeconds = timeLeftInSeconds ??
+            assessments
+                .map((assessment) => assessment.timeGivenInSeconds)
+                .reduce((value, element) => value + element);
+
+  Quiz copyWith({
+    int id,
+    List<Assessment> assessments,
+    int index,
+    bool isComplete,
+    bool isTimed,
+    bool isTutored,
+    int timeLeftInSeconds,
+  }) {
+    return Quiz(
+      id: id ?? this.id,
+      assessments: assessments ?? this.assessments,
+      index: index ?? this.index,
+      isComplete: isComplete ?? this.isComplete,
+      isTimed: isTimed ?? this.isTimed,
+      isTutored: isTutored ?? this.isTutored,
+      timeLeftInSeconds: timeLeftInSeconds ?? this.timeLeftInSeconds,
+    );
+  }
 
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'assessments': assessments,
-      'currentAssessmentIndex': _currentAssessmentIndex,
-      'isComplete': _isComplete,
-      'isTimed': _isTimed,
-      'isTutored': _isTutored,
-      'timeLeftInSeconds': _timeLeftInSeconds,
+      'assessments': assessments?.map((x) => x?.toMap())?.toList(),
+      'index': index,
+      'isComplete': isComplete,
+      'isTimed': isTimed,
+      'isTutored': isTutored,
+      'timeLeftInSeconds': timeLeftInSeconds,
     };
   }
 
   factory Quiz.fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
+
     return Quiz(
       id: map['id'],
-      assessments: List.from(map['assessments'])
-          ?.map((assessment) => Map<String, dynamic>.from(assessment))
-          ?.toList(),
-      currentAssessmentIndex: map['_currentAssessmentIndex'],
+      assessments: List<Assessment>.from(
+        map['assessments']?.map(
+          (assessment) => _getAssessment(
+            Map<String, dynamic>.from(assessment),
+          ),
+        ),
+      ),
+      index: map['index'],
       isComplete: map['isComplete'],
       isTimed: map['isTimed'],
       isTutored: map['isTutored'],
       timeLeftInSeconds: map['timeLeftInSeconds'],
     );
+  }
+
+  Assessment _getAssessment(Map<String, dynamic> assessment) {
+    final category = (assessment['category'] as String).toQuestionCategory;
+    switch (category) {
+      case QuestionCategory.multipleChoice:
+        return MultipleChoiceAssessment.fromMap(assessment);
+      case QuestionCategory.pictureTest:
+        return MultipleChoiceAssessment.fromMap(assessment);
+      case QuestionCategory.theory:
+        return TheoryAssessment.fromMap(assessment);
+      default:
+        return null;
+    }
   }
 
   String toJson() => json.encode(toMap());
@@ -55,7 +114,7 @@ class Quiz {
 
   @override
   String toString() {
-    return 'Quiz(id: $id, assessments: $assessments, _currentAssessmentIndex: $_currentAssessmentIndex, _isComplete: $_isComplete, _isTimed: $_isTimed, _isTutored: $_isTutored, _timeLeftInSeconds: $_timeLeftInSeconds)';
+    return 'Quiz(id: $id)';
   }
 
   @override

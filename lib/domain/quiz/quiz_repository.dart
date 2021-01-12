@@ -12,10 +12,8 @@ class QuizRepository {
   String get _quizPath => 'flamelink/quiz/$_userId/';
 
   Future<void> createQuiz(List<Question> questions) async {
-    final assesments = questions
-        .map((question) => question.blankAssessment)
-        .toList()
-          ..shuffle(); // Shuufle assesments for variability
+    final assesments = _createAssessments(questions)
+      ..shuffle(); // Shuffle assesments for variability
     final creationTimeStamp = DateTime.now().millisecondsSinceEpoch;
     final quiz = Quiz(
       id: creationTimeStamp,
@@ -30,5 +28,9 @@ class QuizRepository {
         .values
         .map((map) => Quiz.fromMap(Map<String, dynamic>.from(map)))
         .toList();
+  }
+
+  List<Assessment> _createAssessments(List<Question> questions) {
+    return questions.map((question) => question.newAssessment).toList();
   }
 }
