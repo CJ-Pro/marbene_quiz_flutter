@@ -24,10 +24,10 @@ class QuizRepository {
 
   Future<List<Quiz>> getAllPreviousQuiz() async {
     final snapshot = await _databaseService.getSnapshot(_quizPath);
-    return Map<String, dynamic>.from(snapshot.value)
-        .values
-        .map((map) => Quiz.fromMap(Map<String, dynamic>.from(map)))
-        .toList();
+    return Map<String, dynamic>.from(snapshot.value ?? {})
+        ?.values
+        ?.map((map) => Quiz.fromMap(Map<String, dynamic>.from(map)))
+        ?.toList();
   }
 
   List<Assessment> _createAssessments(List<Question> questions) {

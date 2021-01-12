@@ -1,8 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../domain/quiz/quiz_model.dart';
-
-import '../../exceptions/exceptions.dart';
 import '../../model/question/question.dart';
 import '../../repository/question_repository.dart';
 import 'quiz_service.dart';
@@ -23,12 +20,7 @@ class QuizViewModel extends GetxController {
     _isLoading(true);
     try {
       _questions = await _questionRepository.getQuestions;
-    } on DatabaseException catch (e) {
-      Get.snackbar(
-        'Error connecting to Database',
-        e.message,
-        backgroundColor: Colors.red,
-      );
+      await _quizService.createQuiz(_questions.values.take(10).toList());
     } finally {
       _isLoading(false);
     }
@@ -36,18 +28,13 @@ class QuizViewModel extends GetxController {
 
   Future<List<Quiz>> getPreviousQuiz() async {
     _isLoading(true);
+    List<Quiz> previousQuiz;
     try {
-      return await _quizService.getAllPreviousQuizSortedByTimestamp();
-    } on DatabaseException catch (e) {
-      Get.snackbar(
-        'Error connecting to Database',
-        e.message,
-        backgroundColor: Colors.red,
-      );
+      previousQuiz = await _quizService.getAllPreviousQuizSortedByTimestamp();
     } finally {
       _isLoading(false);
     }
-    return [];
+    return previousQuiz ?? [];
   }
 
   Map<int, Question> get questions => _questions;
