@@ -10,24 +10,29 @@ class TheoryAssessment extends Assessment {
   final List<String> answers;
   TheoryAssessment({
     int questionId,
+    QuestionCategory category,
     this.answers,
-  }) : super(questionId);
+  }) : super(questionId, category);
   @override
   get solution => answers;
 
   TheoryAssessment copyWith({
     int questionId,
+    QuestionCategory category,
     List<String> answers,
   }) {
     return TheoryAssessment(
       questionId: questionId ?? this.questionId,
+      category: category ?? this.category,
       answers: answers ?? this.answers,
     );
   }
 
+  @override
   Map<String, dynamic> toMap() {
     return {
       'questionId': questionId,
+      'category': category.value,
       'answers': answers,
     };
   }
@@ -37,14 +42,12 @@ class TheoryAssessment extends Assessment {
 
     return TheoryAssessment(
       questionId: map['questionId'],
+      category: (map['category'] as String).toQuestionCategory,
       answers: List<String>.from(map['answers']),
     );
   }
 
   String toJson() => json.encode(toMap());
-
-  factory TheoryAssessment.fromJson(String source) =>
-      TheoryAssessment.fromMap(json.decode(source));
 
   @override
   String toString() => 'TheoryAssessment(questionId: $questionId)';
@@ -58,4 +61,7 @@ class TheoryAssessment extends Assessment {
 
   @override
   int get hashCode => questionId.hashCode;
+
+  @override
+  int get timeGivenInSeconds => throw UnimplementedError();
 }

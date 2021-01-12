@@ -9,24 +9,29 @@ class MultipleChoiceAssessment extends Assessment {
   final int answer;
   MultipleChoiceAssessment({
     int questionId,
+    QuestionCategory category,
     this.answer,
-  }) : super(questionId);
+  }) : super(questionId, category);
   @override
   get solution => answer;
 
   MultipleChoiceAssessment copyWith({
-    int answer,
     int questionId,
+    QuestionCategory category,
+    int answer,
   }) {
     return MultipleChoiceAssessment(
       questionId: questionId ?? this.questionId,
+      category: category ?? this.category,
       answer: answer ?? this.answer,
     );
   }
 
+  @override
   Map<String, dynamic> toMap() {
     return {
       'questionId': questionId,
+      'category': category.value,
       'answer': answer,
     };
   }
@@ -36,14 +41,12 @@ class MultipleChoiceAssessment extends Assessment {
 
     return MultipleChoiceAssessment(
       questionId: map['questionId'],
+      category: (map['category'] as String).toQuestionCategory,
       answer: map['answer'],
     );
   }
 
   String toJson() => json.encode(toMap());
-
-  factory MultipleChoiceAssessment.fromJson(String source) =>
-      MultipleChoiceAssessment.fromMap(json.decode(source));
 
   @override
   String toString() => 'MultipleChoiceAssessment(questionId: $questionId)';
@@ -57,4 +60,7 @@ class MultipleChoiceAssessment extends Assessment {
 
   @override
   int get hashCode => questionId.hashCode;
+
+  @override
+  int get timeGivenInSeconds => throw UnimplementedError();
 }
