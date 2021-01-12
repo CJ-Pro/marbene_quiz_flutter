@@ -1,12 +1,11 @@
+import 'package:meta/meta.dart';
+
 export 'multiple_choice_assessment.dart';
 export 'theory_assessment.dart';
 
+@immutable
 abstract class Assessment {
-  final int id;
+  final int questionId;
   dynamic get solution;
-  bool get flagged;
-  bool get correct;
-  Map<String, dynamic> toMap();
-  static fromMap(x) {}
-  Assessment(this.id);
+  Assessment(this.questionId);
 }

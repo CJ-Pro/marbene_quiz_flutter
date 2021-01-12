@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 
 import 'question.dart';
 
+@immutable
 class PictureTest extends Question {
   final String question;
   final int answer;
@@ -94,39 +95,18 @@ class PictureTest extends Question {
 
   @override
   String toString() {
-    return 'MultipleChoice(answer: $answer, choices: $choices, explanation: $explanation, id: $id, name: $name, question: $question, subject: $subject, system: $system, year: $year)';
+    return 'MultipleChoice(id: $id)';
   }
 
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is PictureTest &&
-        o.answer == answer &&
-        listEquals(o.choices, choices) &&
-        o.explanation == explanation &&
-        o.id == id &&
-        o.name == name &&
-        o.question == question &&
-        o.subject == subject &&
-        o.system == system &&
-        o.year == year;
+    return o is PictureTest && o.id == id;
   }
 
   @override
   int get hashCode {
-    return answer.hashCode ^
-        choices.hashCode ^
-        explanation.hashCode ^
-        id.hashCode ^
-        name.hashCode ^
-        question.hashCode ^
-        subject.hashCode ^
-        system.hashCode ^
-        year.hashCode;
+    return id.hashCode;
   }
-
-  @override
-  Assessment get blankAssessment =>
-      MultipleChoiceAssessment.fromMap({'id': id});
 }

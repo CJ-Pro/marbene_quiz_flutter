@@ -1,36 +1,33 @@
 import 'dart:convert';
 
+import 'package:meta/meta.dart';
+
 import 'assessment.dart';
 
+@immutable
 class MultipleChoiceAssessment extends Assessment {
-  bool _isCorrect;
-  bool _isFlagged;
-  int _answer;
+  final int answer;
   MultipleChoiceAssessment({
-    int id,
-    bool isCorrect,
-    bool isFlagged = false,
+    int questionId,
+    this.answer,
+  }) : super(questionId);
+  @override
+  get solution => answer;
+
+  MultipleChoiceAssessment copyWith({
     int answer,
-  })  : _isCorrect = isCorrect,
-        _isFlagged = isFlagged,
-        _answer = answer,
-        super(id);
-  @override
-  bool get correct => _isCorrect;
+    int questionId,
+  }) {
+    return MultipleChoiceAssessment(
+      questionId: questionId ?? this.questionId,
+      answer: answer ?? this.answer,
+    );
+  }
 
-  @override
-  bool get flagged => _isFlagged;
-
-  @override
-  int get solution => _answer;
-
-  @override
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
-      'isCorrect': _isCorrect,
-      'isFlagged': _isFlagged,
-      'answer': _answer,
+      'questionId': questionId,
+      'answer': answer,
     };
   }
 
@@ -38,9 +35,7 @@ class MultipleChoiceAssessment extends Assessment {
     if (map == null) return null;
 
     return MultipleChoiceAssessment(
-      id: map['id'],
-      isCorrect: map['isCorrect'],
-      isFlagged: map['isFlagged'],
+      questionId: map['questionId'],
       answer: map['answer'],
     );
   }
@@ -51,26 +46,15 @@ class MultipleChoiceAssessment extends Assessment {
       MultipleChoiceAssessment.fromMap(json.decode(source));
 
   @override
-  String toString() {
-    return 'MultipleChoiceAssessment(id: $id, isCorrect: $_isCorrect, isFlagged: $_isFlagged, answer: $_answer)';
-  }
+  String toString() => 'MultipleChoiceAssessment(questionId: $questionId)';
 
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is MultipleChoiceAssessment &&
-        o.id == id &&
-        o._isCorrect == _isCorrect &&
-        o._isFlagged == _isFlagged &&
-        o._answer == _answer;
+    return o is MultipleChoiceAssessment && o.questionId == questionId;
   }
 
   @override
-  int get hashCode {
-    return id.hashCode ^
-        _isCorrect.hashCode ^
-        _isFlagged.hashCode ^
-        _answer.hashCode;
-  }
+  int get hashCode => questionId.hashCode;
 }

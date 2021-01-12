@@ -1,36 +1,34 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
+import 'package:meta/meta.dart';
+
 import 'assessment.dart';
 
+@immutable
 class TheoryAssessment extends Assessment {
-  bool _isCorrect;
-  bool _isFlagged;
-  List<String> _answers;
+  final List<String> answers;
   TheoryAssessment({
-    int id,
-    bool isCorrect,
-    bool isFlagged = false,
+    int questionId,
+    this.answers,
+  }) : super(questionId);
+  @override
+  get solution => answers;
+
+  TheoryAssessment copyWith({
+    int questionId,
     List<String> answers,
-  })  : _isCorrect = isCorrect,
-        _isFlagged = isFlagged,
-        _answers = answers,
-        super(id);
-  @override
-  bool get correct => _isCorrect;
+  }) {
+    return TheoryAssessment(
+      questionId: questionId ?? this.questionId,
+      answers: answers ?? this.answers,
+    );
+  }
 
-  @override
-  bool get flagged => _isFlagged;
-
-  @override
-  List<String> get solution => _answers;
-
-  @override
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
-      'isCorrect': _isCorrect,
-      'isFlagged': _isFlagged,
-      'answers': _answers,
+      'questionId': questionId,
+      'answers': answers,
     };
   }
 
@@ -38,10 +36,8 @@ class TheoryAssessment extends Assessment {
     if (map == null) return null;
 
     return TheoryAssessment(
-      id: map['id'],
-      isCorrect: map['isCorrect'],
-      isFlagged: map['isFlagged'],
-      answers: map['answers'],
+      questionId: map['questionId'],
+      answers: List<String>.from(map['answers']),
     );
   }
 
@@ -51,26 +47,15 @@ class TheoryAssessment extends Assessment {
       TheoryAssessment.fromMap(json.decode(source));
 
   @override
-  String toString() {
-    return 'MultipleChoiceAssessment(id: $id, isCorrect: $_isCorrect, isFlagged: $_isFlagged, answer: $_answers)';
-  }
+  String toString() => 'TheoryAssessment(questionId: $questionId)';
 
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is TheoryAssessment &&
-        o.id == id &&
-        o._isCorrect == _isCorrect &&
-        o._isFlagged == _isFlagged &&
-        o._answers == _answers;
+    return o is TheoryAssessment && o.questionId == questionId;
   }
 
   @override
-  int get hashCode {
-    return id.hashCode ^
-        _isCorrect.hashCode ^
-        _isFlagged.hashCode ^
-        _answers.hashCode;
-  }
+  int get hashCode => questionId.hashCode;
 }

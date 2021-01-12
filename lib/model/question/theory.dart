@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 
 import 'question.dart';
 
+@immutable
 class Theory extends Question {
   final List<String> questions;
   final List<String> answers;
@@ -84,34 +85,18 @@ class Theory extends Question {
 
   @override
   String toString() {
-    return 'Theory(questions: $questions, answers: $answers, subject: $subject, system: $system, year: $year, name: $name, id: $id)';
+    return 'Theory(id: $id)';
   }
 
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is Theory &&
-        listEquals(o.questions, questions) &&
-        listEquals(o.answers, answers) &&
-        o.subject == subject &&
-        o.system == system &&
-        o.year == year &&
-        o.name == name &&
-        o.id == id;
+    return o is Theory && o.id == id;
   }
 
   @override
   int get hashCode {
-    return questions.hashCode ^
-        answers.hashCode ^
-        subject.hashCode ^
-        system.hashCode ^
-        year.hashCode ^
-        name.hashCode ^
-        id.hashCode;
+    return id.hashCode;
   }
-
-  @override
-  Assessment get blankAssessment => TheoryAssessment.fromMap({'id': id});
 }
