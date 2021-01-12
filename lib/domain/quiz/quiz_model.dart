@@ -29,18 +29,19 @@ class Quiz {
   final int timeLeftInSeconds;
   Quiz({
     this.id,
-    this.assessments,
-    this.index,
-    this.isComplete,
-    this.isTimed,
-    this.isTutored,
+    this.assessments = const [],
+    this.index = 0,
+    this.isTimed = false,
+    this.isTutored = true,
+    bool isComplete = false,
     int timeLeftInSeconds,
-  }) :
+  })  :
         //The time is calculated by summing the time given for each assessment.
         timeLeftInSeconds = timeLeftInSeconds ??
             assessments
                 .map((assessment) => assessment.timeGivenInSeconds)
-                .reduce((value, element) => value + element);
+                .reduce((value, element) => value + element),
+        isComplete = (isTimed && timeLeftInSeconds == 0) || isComplete;
 
   Quiz copyWith({
     int id,
