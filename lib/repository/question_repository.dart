@@ -20,7 +20,7 @@ class QuestionRepository {
   Future<Map<int, MultipleChoice>> _getMultipleChoice() async {
     final snapshot =
         await _databaseService.getSnapshot(_getPath('multipleChoice'));
-    return Map.from(snapshot.value).map(
+    return Map.from(snapshot.value ?? {})?.map(
       (key, value) => MapEntry(
         int.parse(key),
         MultipleChoice.fromMap(Map<String, dynamic>.from(value)),
@@ -31,7 +31,7 @@ class QuestionRepository {
   Future<Map<int, PictureTest>> _getPictureTest() async {
     final snapshot =
         await _databaseService.getSnapshot(_getPath('pictureTest'));
-    return Map.from(snapshot.value).map(
+    return Map.from(snapshot.value ?? {})?.map(
       (key, value) => MapEntry(
         int.parse(key),
         PictureTest.fromMap(Map<String, dynamic>.from(value)),
@@ -41,7 +41,7 @@ class QuestionRepository {
 
   Future<Map<int, Theory>> _getTheory() async {
     final snapshot = await _databaseService.getSnapshot(_getPath('theory'));
-    return Map.from(snapshot.value).map(
+    return Map.from(snapshot.value ?? {})?.map(
       (key, value) => MapEntry(
         int.parse(key),
         Theory.fromMap(Map<String, dynamic>.from(value)),
