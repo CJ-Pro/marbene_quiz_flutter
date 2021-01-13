@@ -31,6 +31,6 @@ class QuizRepository {
   }
 
   List<Assessment> _createAssessments(List<Question> questions) {
-    return questions.map((question) => question.newAssessment).toList();
+    return questions?.map((question) => question?.newAssessment)?.toList();
   }
 }
