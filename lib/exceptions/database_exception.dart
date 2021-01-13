@@ -1,4 +1,5 @@
-class DatabaseException implements Exception {
-  String message;
-  DatabaseException(this.message);
+import 'app_exception.dart';
+
+class DatabaseException extends AppException {
+  DatabaseException(String message) : super(message);
 }
