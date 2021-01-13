@@ -1,30 +1,30 @@
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
 import 'package:meta/meta.dart';
 
 import 'assessment.dart';
 
 @immutable
 class TheoryAssessment extends Assessment {
-  final List<String> answers;
+  final TheoryAnswer answer;
   TheoryAssessment({
     int questionId,
     QuestionCategory category,
-    this.answers,
+    this.answer,
   }) : super(questionId, category);
+
   @override
-  get solution => answers;
+  Answer get getUserAnswer => answer;
 
   TheoryAssessment copyWith({
     int questionId,
     QuestionCategory category,
-    List<String> answers,
+    Answer answer,
   }) {
     return TheoryAssessment(
       questionId: questionId ?? this.questionId,
       category: category ?? this.category,
-      answers: answers ?? this.answers,
+      answer: answer ?? this.answer,
     );
   }
 
@@ -32,8 +32,8 @@ class TheoryAssessment extends Assessment {
   Map<String, dynamic> toMap() {
     return {
       'questionId': questionId,
-      'category': category.value,
-      'answers': answers,
+      'category': category?.value,
+      'answer': answer?.toMap(),
     };
   }
 
@@ -43,25 +43,29 @@ class TheoryAssessment extends Assessment {
     return TheoryAssessment(
       questionId: map['questionId'],
       category: (map['category'] as String).toQuestionCategory,
-      answers: List<String>.from(map['answers']),
+      answer: map['answer'],
     );
   }
 
   String toJson() => json.encode(toMap());
 
   @override
-  String toString() => 'TheoryAssessment(questionId: $questionId)';
+  String toString() =>
+      'TheoryAssessment(questionId: $questionId, category: $category, answer: $answer)';
 
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is TheoryAssessment && o.questionId == questionId;
+    return o is TheoryAssessment &&
+        o.questionId == questionId &&
+        o.category == category &&
+        o.answer == answer;
   }
 
   @override
-  int get hashCode => questionId.hashCode;
+  int get hashCode => questionId.hashCode ^ category.hashCode ^ answer.hashCode;
 
   @override
-  int get timeGivenInSeconds => 60;
+  int get timeGivenInSeconds => 30;
 }

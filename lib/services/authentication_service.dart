@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
+import 'package:marbene/exceptions/exceptions.dart';
 import '../exceptions/authentication_exception.dart';
 
 class AuthenticationService extends GetxService {
@@ -31,6 +32,8 @@ class AuthenticationService extends GetxService {
       throw AuthenticationException(e.message);
     } on SocketException {
       throw AuthenticationException('No Internet Connection.');
+    } catch (e) {
+      throw UnknownException('Unknown error occurred.');
     }
   }
 
@@ -48,6 +51,8 @@ class AuthenticationService extends GetxService {
       throw AuthenticationException(e.message);
     } on SocketException {
       throw AuthenticationException('No Internet Connection.');
+    } catch (e) {
+      throw UnknownException('Unknown error occurred.');
     }
   }
 
@@ -56,6 +61,8 @@ class AuthenticationService extends GetxService {
       await _auth.signOut();
     } on SocketException {
       throw AuthenticationException('No Internet Connection.');
+    } catch (e) {
+      throw UnknownException('Unknown error occurred.');
     }
   }
 }

@@ -1,7 +1,9 @@
 import 'package:meta/meta.dart';
 
+import '../answer/answer.dart';
 import '../question/category_enum.dart';
 
+export '../answer/answer.dart';
 export '../question/category_enum.dart';
 export 'multiple_choice_assessment.dart';
 export 'theory_assessment.dart';
@@ -14,8 +16,8 @@ abstract class Assessment {
   ///The category of the question.
   final QuestionCategory category;
 
-  ///The users given solution.
-  dynamic get solution;
+  ///The users answer.
+  Answer get getUserAnswer;
 
   ///The time given in seconds if assessment is timed.
   int get timeGivenInSeconds;
@@ -24,7 +26,7 @@ abstract class Assessment {
   Map<String, dynamic> toMap();
 
   ///If the particular assessment has been answered.
-  bool get isSubmitted => solution != null;
+  bool get isSubmitted => getUserAnswer != null;
 
   ///A quiz assessment
   Assessment(this.questionId, this.category);

@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:firebase_database/firebase_database.dart';
-import '../exceptions/database_exception.dart';
+import '../exceptions/exceptions.dart';
 
 class DatabaseService extends GetxService {
   FirebaseDatabase _database;
@@ -19,6 +19,8 @@ class DatabaseService extends GetxService {
       return await reference.once();
     } on DatabaseError catch (e) {
       throw DatabaseException(e.message);
+    } catch (e) {
+      throw UnknownException('Unknown error occurred.');
     }
   }
 
@@ -29,6 +31,8 @@ class DatabaseService extends GetxService {
       await reference.child(key.toString()).set(value);
     } on DatabaseError catch (e) {
       throw DatabaseException(e.message);
+    } catch (e) {
+      throw UnknownException('Unknown error occurred.');
     }
   }
 }

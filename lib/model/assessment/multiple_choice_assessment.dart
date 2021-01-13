@@ -6,19 +6,20 @@ import 'assessment.dart';
 
 @immutable
 class MultipleChoiceAssessment extends Assessment {
-  final int answer;
+  final MultipleChoiceAnswer answer;
   MultipleChoiceAssessment({
     int questionId,
     QuestionCategory category,
     this.answer,
   }) : super(questionId, category);
+
   @override
-  get solution => answer;
+  Answer get getUserAnswer => answer;
 
   MultipleChoiceAssessment copyWith({
     int questionId,
     QuestionCategory category,
-    int answer,
+    Answer answer,
   }) {
     return MultipleChoiceAssessment(
       questionId: questionId ?? this.questionId,
@@ -31,8 +32,8 @@ class MultipleChoiceAssessment extends Assessment {
   Map<String, dynamic> toMap() {
     return {
       'questionId': questionId,
-      'category': category.value,
-      'answer': answer,
+      'category': category?.value,
+      'answer': answer?.toMap(),
     };
   }
 
@@ -41,7 +42,7 @@ class MultipleChoiceAssessment extends Assessment {
 
     return MultipleChoiceAssessment(
       questionId: map['questionId'],
-      category: (map['category'] as String).toQuestionCategory,
+      category: (map['category'] as String)?.toQuestionCategory,
       answer: map['answer'],
     );
   }
@@ -49,17 +50,21 @@ class MultipleChoiceAssessment extends Assessment {
   String toJson() => json.encode(toMap());
 
   @override
-  String toString() => 'MultipleChoiceAssessment(questionId: $questionId)';
+  String toString() =>
+      'MultipleChoiceAssessment(questionId: $questionId, category: $category, answer: $answer)';
 
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is MultipleChoiceAssessment && o.questionId == questionId;
+    return o is MultipleChoiceAssessment &&
+        o.questionId == questionId &&
+        o.category == category &&
+        o.answer == answer;
   }
 
   @override
-  int get hashCode => questionId.hashCode;
+  int get hashCode => questionId.hashCode ^ category.hashCode ^ answer.hashCode;
 
   @override
   int get timeGivenInSeconds => 30;

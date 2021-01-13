@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
+
 import '../../domain/quiz/quiz_model.dart';
+import '../../exceptions/app_exception.dart';
 import '../../model/question/question.dart';
 import '../../repository/question_repository.dart';
 import 'quiz_service.dart';
@@ -20,7 +22,8 @@ class QuizViewModel extends GetxController {
     _isLoading(true);
     try {
       _questions = await _questionRepository.getQuestions;
-      await _quizService.createQuiz(_questions.values.take(10).toList());
+    } catch (e) {
+      Get.snackbar('Error', (e as AppException).message);
     } finally {
       _isLoading(false);
     }
