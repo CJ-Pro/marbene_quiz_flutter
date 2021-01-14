@@ -21,7 +21,9 @@ class QuizViewModel extends GetxController {
   Future<void> _loadQuestions() async {
     _isLoading(true);
     try {
-      _questions = await _questionRepository.getQuestions;
+      //Unmodifiable map
+      _questions = Map<int, Question>.unmodifiable(
+          await _questionRepository.getQuestions);
     } catch (e) {
       Get.snackbar('Error', (e as AppException).message);
     } finally {
@@ -38,6 +40,17 @@ class QuizViewModel extends GetxController {
       _isLoading(false);
     }
     return previousQuiz ?? [];
+  }
+
+  Future<Quiz> getOneQuiz() async {
+    _isLoading(true);
+    Quiz quiz;
+    try {
+      quiz = (await _quizService.getAllPreviousQuizSortedByTimestamp()).first;
+    } finally {
+      _isLoading(false);
+    }
+    return quiz;
   }
 
   Map<int, Question> get questions => _questions;

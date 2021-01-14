@@ -1,4 +1,4 @@
-class AppException implements Exception {
+abstract class AppException implements Exception {
   final String message;
 
   AppException(this.message);

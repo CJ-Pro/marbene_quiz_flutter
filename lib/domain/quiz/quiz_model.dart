@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
@@ -29,7 +30,7 @@ class Quiz {
   final int timeLeftInSeconds;
   Quiz({
     this.id,
-    this.assessments = const [],
+    this.assessments,
     this.index = 0,
     this.isTimed = false,
     this.isTutored = true,

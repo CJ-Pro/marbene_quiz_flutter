@@ -14,6 +14,7 @@ class QuestionRepository {
 
   Future<Question> getQuestionById(int id) async {
     final questions = await getQuestions;
+    print(questions[id]);
     return questions[id];
   }
 
