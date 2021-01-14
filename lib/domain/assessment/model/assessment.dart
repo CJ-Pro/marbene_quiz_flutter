@@ -1,10 +1,10 @@
 import 'package:meta/meta.dart';
 
-import '../answer/answer.dart';
-import '../question/category_enum.dart';
+import '../../question/model/category_enum.dart';
+import '../value/answer/answer.dart';
 
-export '../answer/answer.dart';
-export '../question/category_enum.dart';
+export '../../question/model/category_enum.dart';
+export '../value/answer/answer.dart';
 export 'multiple_choice_assessment.dart';
 export 'theory_assessment.dart';
 

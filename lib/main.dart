@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
           ? Container(
               color: Colors.red,
             )
-          : const PreviousQuizPage(),
+          : Container(),
     );
   }
 }

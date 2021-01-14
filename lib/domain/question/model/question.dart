@@ -1,9 +1,9 @@
 import 'package:meta/meta.dart';
 
-import '../assessment/assessment.dart';
+import '../../assessment/model/assessment.dart';
 import 'category_enum.dart';
 
-export '../assessment/assessment.dart';
+export '../../assessment/model/assessment.dart';
 export 'category_enum.dart';
 export 'multiple_choice.dart';
 export 'picture_test.dart';

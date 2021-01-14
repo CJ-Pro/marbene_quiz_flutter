@@ -1,10 +1,10 @@
 import 'package:get/get.dart';
 
-import '../../domain/quiz/quiz_model.dart';
-import '../../exceptions/app_exception.dart';
-import '../../model/question/question.dart';
-import '../../repository/question_repository.dart';
-import 'quiz_service.dart';
+import '../../../exceptions/app_exception.dart';
+import '../../question/model/question.dart';
+import '../../question/repository/question_repository.dart';
+import '../../quiz/model/quiz.dart';
+import '../services/quiz_service.dart';
 
 class QuizViewModel extends GetxController {
   final _quizService = Get.put(QuizService());

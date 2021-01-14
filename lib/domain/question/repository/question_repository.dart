@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:marbene/services/database_service.dart';
-import '../model/question/question.dart';
+import '../../question/model/question.dart';
 
 class QuestionRepository {
   final _databaseService = Get.find<DatabaseService>();
@@ -14,7 +14,6 @@ class QuestionRepository {
 
   Future<Question> getQuestionById(int id) async {
     final questions = await getQuestions;
-    print(questions[id]);
     return questions[id];
   }
 

@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
 
-import '../../model/question/question.dart';
-import '../../services/authentication_service.dart';
-import '../../services/database_service.dart';
-import 'quiz_model.dart';
+import '../../../services/authentication_service.dart';
+import '../../../services/database_service.dart';
+import '../../question/model/question.dart';
+import '../model/quiz.dart';
 
 class QuizRepository {
   final _databaseService = Get.find<DatabaseService>();

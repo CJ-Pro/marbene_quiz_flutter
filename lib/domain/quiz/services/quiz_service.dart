@@ -1,5 +1,5 @@
-import 'quiz_model.dart';
-import 'quiz_repository.dart';
+import '../model/quiz.dart';
+import '../repository/quiz_repository.dart';
 
 class QuizService extends QuizRepository {
   Future<List<Quiz>> getAllPreviousQuizSortedByTimestamp() async {

@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:meta/meta.dart';
 
-import '../../model/assessment/assessment.dart';
+import '../../assessment/model/assessment.dart';
 
 @immutable
 class Quiz {
