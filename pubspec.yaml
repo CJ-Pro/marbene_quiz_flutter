@@ -13,13 +13,15 @@ dependencies:
   firebase_auth: ^0.18.4+1
   firebase_core: ^0.5.3
   firebase_database: ^4.4.0
+  flutter_html: ^1.1.1
   flutter_login: ^1.0.14
   get: ^3.23.1
+  random_color: ^1.0.5
 
 dev_dependencies:
-  very_good_analysis: ^1.0.0
   flutter_test:
     sdk: flutter
+  very_good_analysis: ^1.0.0
 
 flutter:
   uses-material-design: true
