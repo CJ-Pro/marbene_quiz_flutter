@@ -6,15 +6,11 @@ import 'assessment.dart';
 
 @immutable
 class TheoryAssessment extends Assessment {
-  final TheoryAnswer answer;
   TheoryAssessment({
     int questionId,
     QuestionCategory category,
-    this.answer,
-  }) : super(questionId, category);
-
-  @override
-  Answer get getUserAnswer => answer;
+    TheoryAnswer answer,
+  }) : super(questionId, category, answer);
 
   TheoryAssessment copyWith({
     int questionId,

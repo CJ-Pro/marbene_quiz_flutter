@@ -14,6 +14,9 @@ abstract class Answer {
   ///If the answer is correct.
   final bool isCorrect;
 
+  ///Map representation of answer.
+  Map<String, dynamic> toMap();
+
   ///A users answer to an assessment.
   Answer(this.questionId, this.input, this.isCorrect);
 }

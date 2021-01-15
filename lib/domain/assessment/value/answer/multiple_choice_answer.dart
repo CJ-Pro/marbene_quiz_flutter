@@ -24,6 +24,7 @@ class MultipleChoiceAnswer extends Answer {
     );
   }
 
+  @override
   Map<String, dynamic> toMap() {
     return {
       'questionId': questionId,

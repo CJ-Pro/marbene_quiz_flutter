@@ -6,15 +6,11 @@ import 'assessment.dart';
 
 @immutable
 class MultipleChoiceAssessment extends Assessment {
-  final MultipleChoiceAnswer answer;
   MultipleChoiceAssessment({
     int questionId,
     QuestionCategory category,
-    this.answer,
-  }) : super(questionId, category);
-
-  @override
-  Answer get getUserAnswer => answer;
+    MultipleChoiceAnswer answer,
+  }) : super(questionId, category, answer);
 
   MultipleChoiceAssessment copyWith({
     int questionId,

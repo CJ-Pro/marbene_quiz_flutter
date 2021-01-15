@@ -17,7 +17,7 @@ abstract class Assessment {
   final QuestionCategory category;
 
   ///The users answer.
-  Answer get getUserAnswer;
+  final Answer answer;
 
   ///The time given in seconds if assessment is timed.
   int get timeGivenInSeconds;
@@ -26,8 +26,8 @@ abstract class Assessment {
   Map<String, dynamic> toMap();
 
   ///If the particular assessment has been answered.
-  bool get isSubmitted => getUserAnswer != null;
+  bool get isSubmitted => answer != null;
 
   ///A quiz assessment
-  Assessment(this.questionId, this.category);
+  Assessment(this.questionId, this.category, this.answer);
 }
