@@ -22,18 +22,26 @@ class StartQuizPage extends StatelessWidget {
           itemCount: quiz.assessments.length,
           itemBuilder: (BuildContext context, int index) {
             final assessment = quiz.assessments[index];
-            if (assessment is MultipleChoiceAssessment) {
-              return MultipleChoiceAssessmentWidget(assessment)
-                  .render(quiz.isTutored);
-            } else if (assessment is TheoryAssessment) {
-              return Container();
-            } else {
-              //Assessment is null.
-              throw NullThrownError();
-            }
+            return Column(
+              children: [
+                Expanded(
+                  child: assessmentWidget(assessment),
+                ),
+              ],
+            );
           },
         ),
       ),
     );
+  }
+
+  Widget assessmentWidget(Assessment assessment) {
+    if (assessment is MultipleChoiceAssessment) {
+      return MultipleChoiceAssessmentWidget(assessment).render(quiz.isTutored);
+    } else if (assessment is TheoryAssessment) {
+      return Container();
+    } else {
+      throw NullThrownError();
+    }
   }
 }
