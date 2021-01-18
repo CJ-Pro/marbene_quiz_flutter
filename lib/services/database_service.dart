@@ -24,15 +24,11 @@ class DatabaseService extends GetxService {
     }
   }
 
-  Future<void> setData(
-      String path, dynamic key, Map<String, dynamic> value) async {
-    try {
-      final reference = _ref.child(path);
-      await reference.child(key.toString()).set(value);
-    } on DatabaseError catch (e) {
-      throw DatabaseException(e.message);
-    } catch (e) {
-      throw UnknownException('Unknown error occurred.');
-    }
+  void setData(String path, String key, dynamic value) {
+    _ref.child(path)..child(key).set(value);
+  }
+
+  void updateData(String path, Map<String, dynamic> value) {
+    _ref.child(path)..update(value);
   }
 }

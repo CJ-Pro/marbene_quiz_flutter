@@ -6,20 +6,22 @@ import 'answer.dart';
 
 @immutable
 class MultipleChoiceAnswer extends Answer {
+  final int selectedChoice;
+  final bool isCorrect;
   MultipleChoiceAnswer(
     int questionId,
-    int input,
-    bool isCorrect,
-  ) : super(questionId, input, isCorrect);
+    this.selectedChoice,
+    this.isCorrect,
+  ) : super(questionId);
 
   MultipleChoiceAnswer copyWith({
     int questionId,
-    int input,
+    int selectedChoice,
     bool isCorrect,
   }) {
     return MultipleChoiceAnswer(
       questionId ?? this.questionId,
-      input ?? this.input,
+      selectedChoice ?? this.selectedChoice,
       isCorrect ?? this.isCorrect,
     );
   }
@@ -28,7 +30,7 @@ class MultipleChoiceAnswer extends Answer {
   Map<String, dynamic> toMap() {
     return {
       'questionId': questionId,
-      'input': input,
+      'selectedChoice': selectedChoice,
       'isCorrect': isCorrect,
     };
   }
@@ -38,7 +40,7 @@ class MultipleChoiceAnswer extends Answer {
 
     return MultipleChoiceAnswer(
       map['questionId'],
-      map['input'],
+      map['selectedChoice'],
       map['isCorrect'],
     );
   }
@@ -50,7 +52,7 @@ class MultipleChoiceAnswer extends Answer {
 
   @override
   String toString() =>
-      'MultipleChoiceAnswer(questionId: $questionId, input: $input, isCorrect: $isCorrect)';
+      'MultipleChoiceAnswer(questionId: $questionId, selectedChoice: $selectedChoice, isCorrect: $isCorrect)';
 
   @override
   bool operator ==(Object o) {
@@ -58,10 +60,11 @@ class MultipleChoiceAnswer extends Answer {
 
     return o is MultipleChoiceAnswer &&
         o.questionId == questionId &&
-        o.input == input &&
+        o.selectedChoice == selectedChoice &&
         o.isCorrect == isCorrect;
   }
 
   @override
-  int get hashCode => questionId.hashCode ^ input.hashCode ^ isCorrect.hashCode;
+  int get hashCode =>
+      questionId.hashCode ^ selectedChoice.hashCode ^ isCorrect.hashCode;
 }

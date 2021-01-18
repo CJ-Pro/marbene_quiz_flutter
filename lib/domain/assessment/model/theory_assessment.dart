@@ -9,7 +9,7 @@ class TheoryAssessment extends Assessment {
   TheoryAssessment({
     int questionId,
     QuestionCategory category,
-    TheoryAnswer answer,
+    dynamic answer,
   }) : super(questionId, category, answer);
 
   TheoryAssessment copyWith({
@@ -46,21 +46,17 @@ class TheoryAssessment extends Assessment {
   String toJson() => json.encode(toMap());
 
   @override
-  String toString() =>
-      'TheoryAssessment(questionId: $questionId, category: $category, answer: $answer)';
+  String toString() => 'TheoryAssessment(questionId: $questionId)';
 
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is TheoryAssessment &&
-        o.questionId == questionId &&
-        o.category == category &&
-        o.answer == answer;
+    return o is TheoryAssessment && o.questionId == questionId;
   }
 
   @override
-  int get hashCode => questionId.hashCode ^ category.hashCode ^ answer.hashCode;
+  int get hashCode => questionId.hashCode;
 
   @override
   int get timeGivenInSeconds => 30;

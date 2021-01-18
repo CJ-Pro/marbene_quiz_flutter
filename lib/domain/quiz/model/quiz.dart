@@ -12,7 +12,7 @@ class Quiz {
   final int id;
 
   ///Assessments list keep reference to questions.
-  final List<Assessment> assessments;
+  final UnmodifiableListView<Assessment> assessments;
 
   ///The index of the current assessment.
   final int index;
@@ -46,7 +46,7 @@ class Quiz {
 
   Quiz copyWith({
     int id,
-    List<Assessment> assessments,
+    UnmodifiableListView<Assessment> assessments,
     int index,
     bool isComplete,
     bool isTimed,
@@ -76,26 +76,29 @@ class Quiz {
     };
   }
 
-  factory Quiz.fromMap(Map<String, dynamic> map) {
+  factory Quiz.fromMap(map) {
     if (map == null) return null;
+
+    Assessment getAssessment(map) {
+      final category = (map['category'] as String).toQuestionCategory;
+      switch (category) {
+        case QuestionCategory.multipleChoice:
+          return MultipleChoiceAssessment.fromMap(map);
+        case QuestionCategory.pictureTest:
+          return MultipleChoiceAssessment.fromMap(map);
+        case QuestionCategory.theory:
+          return TheoryAssessment.fromMap(map);
+        default:
+          return null;
+      }
+    }
 
     return Quiz(
       id: map['id'],
-      assessments: List<Assessment>.from(
-        map['assessments']?.map((assessment) {
-          final category =
-              (assessment['category'] as String).toQuestionCategory;
-          switch (category) {
-            case QuestionCategory.multipleChoice:
-              return MultipleChoiceAssessment.fromMap(assessment);
-            case QuestionCategory.pictureTest:
-              return MultipleChoiceAssessment.fromMap(assessment);
-            case QuestionCategory.theory:
-              return TheoryAssessment.fromMap(assessment);
-            default:
-              return null;
-          }
-        }),
+      assessments: UnmodifiableListView<Assessment>(
+        List<Assessment>.from(
+          map['assessments']?.map(getAssessment),
+        ),
       ),
       index: map['index'],
       isComplete: map['isComplete'],

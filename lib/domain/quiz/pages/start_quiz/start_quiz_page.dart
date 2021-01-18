@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import '../../../assessment/model/assessment.dart';
+import 'package:get/get.dart';
+import 'package:marbene/domain/quiz/repository/quiz_repository.dart';
 
+import '../../../assessment/model/assessment.dart';
+import '../../../assessment/widgets/assessment_widget.dart';
 import '../../model/quiz.dart';
-import '../../../assessment/widgets/multiple_choice_assessment_widget.dart';
 
 class StartQuizPage extends StatelessWidget {
   final Quiz quiz;
@@ -14,11 +16,15 @@ class StartQuizPage extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: PageView.builder(
+          controller: PageController(
+            initialPage: 0,
+          ),
           itemCount: quiz.assessments.length,
           itemBuilder: (BuildContext context, int index) {
             final assessment = quiz.assessments[index];
             if (assessment is MultipleChoiceAssessment) {
-              return MultipleChoiceAssessmentWidget(assessment).render(context);
+              return MultipleChoiceAssessmentWidget(assessment)
+                  .render(quiz.isTutored);
             } else if (assessment is TheoryAssessment) {
               return Container();
             } else {
