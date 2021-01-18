@@ -6,7 +6,6 @@ import '../../viewmodels/multiple_choice_assessment_viewmodel.dart';
 import '../assessment_widget.dart';
 import '../explanation_block.dart';
 import '../question_block.dart';
-import '../submit_button.dart';
 import 'choice_select.dart';
 
 class MultipleChoiceAssessmentWidget extends AssessmentWidget {
@@ -40,9 +39,6 @@ class MultipleChoiceAssessmentWidget extends AssessmentWidget {
                 isSubmitted: state.isSubmitted,
                 correctChoice: _question.answer,
               ),
-              isTutored && !state.isSubmitted
-                  ? SubmitButton(onPressed: _viewmodel.submit)
-                  : const SizedBox.shrink(),
               state.isSubmitted
                   ? ExplanationBlock(explanation: _question.explanation)
                   : const SizedBox.shrink(),
