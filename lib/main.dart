@@ -31,50 +31,7 @@ class MyApp extends StatelessWidget {
           ? Container(
               color: Colors.red,
             )
-          : QuizTest(),
-    );
-  }
-}
-
-class QuizTest extends StatefulWidget {
-  QuizTest({Key key}) : super(key: key);
-
-  @override
-  _QuizTestState createState() => _QuizTestState();
-}
-
-class _QuizTestState extends State<QuizTest> {
-  @override
-  void initState() {
-    future = Get.put(QuizViewModel()).getPreviousQuiz();
-    super.initState();
-  }
-
-  Future<List<Quiz>> future;
-
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder<List<Quiz>>(
-      future: future,
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
-        if (snapshot.hasData) {
-          final quiz = snapshot.data as List<Quiz>;
-          return StartQuizPage(
-            quiz: quiz.first,
-          );
-        } else if (snapshot.hasError) {
-          return Scaffold(
-            body: Center(
-              child: Text(
-                snapshot.error.toString(),
-              ),
-            ),
-          );
-        }
-        return const Center(
-          child: CircularProgressIndicator(),
-        );
-      },
+          : Container(),
     );
   }
 }
