@@ -10,13 +10,27 @@ class MultipleChoiceAssessmentViewModel
   MultipleChoiceAssessmentViewModel(MultipleChoiceAssessment assessment)
       : super(assessment);
 
-  final _isLoading = true.obs;
-  bool get isLoading => _isLoading.value;
-
   MultipleChoice _question;
   MultipleChoice get question => _question;
 
   List<String> choiceLabels = const ['A.', 'B.', 'C.', 'D.', 'E.'];
+
+  @override
+  void onInit() {
+    super.onInit();
+    _loadQuestion();
+  }
+
+  Future<void> _loadQuestion() async {
+    try {
+      change(value, status: RxStatus.loading());
+      _question =
+          await Get.put(QuestionRepository()).getQuestionById(value.questionId);
+      change(value, status: RxStatus.success());
+    } catch (e) {
+      change(value, status: RxStatus.error('$e'));
+    }
+  }
 
   void updateChoice(int index) {
     change(value.copyWith(currentChoice: index));
@@ -32,21 +46,5 @@ class MultipleChoiceAssessmentViewModel
         ),
       ),
     );
-  }
-
-  @override
-  void onInit() {
-    super.onInit();
-    _loadQuestion();
-  }
-
-  Future<void> _loadQuestion() async {
-    _isLoading(true);
-    try {
-      _question =
-          await Get.put(QuestionRepository()).getQuestionById(value.questionId);
-    } finally {
-      _isLoading(false);
-    }
   }
 }
