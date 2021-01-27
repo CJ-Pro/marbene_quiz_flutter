@@ -40,8 +40,9 @@ class Quiz {
         //The time is calculated by summing the time given for each assessment.
         timeLeftInSeconds = timeLeftInSeconds ??
             assessments
-                .map((assessment) => assessment.timeGivenInSeconds)
-                .reduce((value, element) => value + element),
+                ?.map((assessment) => assessment.timeGivenInSeconds)
+                ?.reduce((value, element) => value + element) ??
+            0,
         isComplete = (isTimed && timeLeftInSeconds == 0) || isComplete;
 
   Quiz copyWith({

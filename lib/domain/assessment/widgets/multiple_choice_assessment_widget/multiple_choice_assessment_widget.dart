@@ -1,51 +1,55 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:marbene/domain/assessment/widgets/assessment_widget.dart';
 
 import '../../../question/model/question.dart';
-import '../../viewmodels/multiple_choice_assessment_viewmodel.dart';
-import '../assessment_widget.dart';
+import '../../viewmodel/multiple_choice_assessment_viewmodel.dart';
 import '../explanation_block.dart';
 import '../question_block.dart';
+import '../submit_button_bar.dart';
 import 'choice_select.dart';
 
 class MultipleChoiceAssessmentWidget extends AssessmentWidget {
-  MultipleChoiceAssessmentWidget(
-    MultipleChoiceAssessment assessment,
-  ) : super(assessment);
+  MultipleChoiceAssessmentWidget(MultipleChoiceAssessment assessment)
+      : super(assessment);
 
   @override
-  Widget render(bool isTutored) {
-    final _viewmodel = Get.put(
-      MultipleChoiceAssessmentViewModel(assessment),
-      tag: assessment.questionId.toString(),
-    );
-
-    return Obx(
-      () {
-        if (_viewmodel.isLoading)
-          return const Center(child: CircularProgressIndicator());
-
+  Widget buildAssessment() {
+    final _viewmodel = Get.put(MultipleChoiceAssessmentViewModel(assessment),
+        tag: '${assessment.questionId}');
+    return _viewmodel.obx(
+      (state) {
         final _question = _viewmodel.question;
-
-        return _viewmodel.obx(
-          (state) => ListView(
-            children: [
-              QuestionBlock(question: _question.question),
-              _ChoiceList(
-                choices: _question.choices,
-                currentChoice: state.currentChoice,
-                labels: _viewmodel.choiceLabels,
-                onTap: _viewmodel.updateChoice,
-                isSubmitted: state.isSubmitted,
-                correctChoice: _question.answer,
-              ),
-              state.isSubmitted
-                  ? ExplanationBlock(explanation: _question.explanation)
-                  : const SizedBox.shrink(),
-            ],
-          ),
+        return ListView(
+          children: [
+            QuestionBlock(question: _question.question),
+            _ChoiceList(
+              choices: _question.choices,
+              currentChoice: state.currentChoice,
+              labels: _viewmodel.choiceLabels,
+              onTap: _viewmodel.updateChoice,
+              isSubmitted: state.isSubmitted,
+              correctChoice: _question.answer,
+            ),
+            state.isSubmitted
+                ? ExplanationBlock(explanation: _question.explanation)
+                : const SizedBox.shrink(),
+          ],
         );
       },
+    );
+  }
+
+  @override
+  Widget bottomBar() {
+    final _viewmodel = Get.find<MultipleChoiceAssessmentViewModel>(
+        tag: '${assessment.questionId}');
+    return _viewmodel.obx(
+      (state) => SubmitButtonBar(
+        canShowSubmit: !state.isSubmitted,
+        onSubmit: _viewmodel.submit,
+      ),
+      onLoading: const SizedBox.shrink(),
     );
   }
 }
