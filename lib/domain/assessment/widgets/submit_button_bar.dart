@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import '../../quiz/viewmodel/start_quiz_viewmodel.dart';
 
 class SubmitButtonBar extends StatelessWidget {
   final VoidCallback onSubmit;
@@ -11,30 +13,61 @@ class SubmitButtonBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const _iconPadding = EdgeInsets.all(15);
-    const _iconSize = 30.0;
+    final _quizViewModel = Get.find<QuizViewModel>();
+    const _navigateDuration = Duration(milliseconds: 300);
+    const _curve = Curves.decelerate;
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          IconButton(
-              padding: _iconPadding,
-              icon: const Icon(
-                Icons.keyboard_arrow_left_rounded,
-                size: _iconSize,
-              ),
-              onPressed: () {}),
-          canShowSubmit
-              ? Expanded(child: _SubmitButton(onSubmit: onSubmit))
-              : const SizedBox.shrink(),
-          IconButton(
-              padding: _iconPadding,
-              icon: const Icon(
-                Icons.keyboard_arrow_right_rounded,
-                size: _iconSize,
-              ),
-              onPressed: () {})
+          _PageNavigationButton(
+              onTap: () async =>
+                  await _quizViewModel.pageController.previousPage(
+                    duration: _navigateDuration,
+                    curve: _curve,
+                  ),
+              iconData: Icons.keyboard_arrow_left_rounded),
+          Expanded(
+            child:
+                canShowSubmit ? _SubmitButton(onSubmit: onSubmit) : Container(),
+          ),
+          _PageNavigationButton(
+              onTap: () async => await _quizViewModel.pageController.nextPage(
+                    duration: _navigateDuration,
+                    curve: _curve,
+                  ),
+              iconData: Icons.keyboard_arrow_right_rounded)
         ],
+      ),
+    );
+  }
+}
+
+class _PageNavigationButton extends StatelessWidget {
+  const _PageNavigationButton({
+    Key key,
+    @required VoidCallback onTap,
+    @required IconData iconData,
+  })  : _onTap = onTap,
+        _iconData = iconData,
+        super(key: key);
+
+  final VoidCallback _onTap;
+  final IconData _iconData;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16),
+      child: IconButton(
+        splashRadius: 0.1,
+        padding: const EdgeInsets.only(top: 5),
+        icon: Icon(
+          _iconData,
+          size: 45,
+        ),
+        onPressed: _onTap,
       ),
     );
   }

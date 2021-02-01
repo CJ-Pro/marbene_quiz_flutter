@@ -19,6 +19,8 @@ class StartQuizPage extends StatelessWidget {
       body: SafeArea(
         child: _viewmodel.obx(
           (state) => PageView.builder(
+            itemCount: state.assessments.length,
+            controller: _viewmodel.pageController,
             itemBuilder: (_, index) {
               final assessment = state.assessments[index];
 
@@ -36,7 +38,7 @@ class StartQuizPage extends StatelessWidget {
     } else if (assessment is TheoryAssessment) {
       return Container();
     } else {
-      throw NullThrownError();
+      return Container();
     }
   }
 }
