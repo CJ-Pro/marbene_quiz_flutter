@@ -6,4 +6,9 @@ const defaultTextTheme = TextTheme(
     fontWeight: FontWeight.bold,
     fontSize: 18,
   ),
+  headline1: TextStyle(
+    color: Colors.black,
+    fontWeight: FontWeight.bold,
+    fontSize: 24,
+  ),
 );
