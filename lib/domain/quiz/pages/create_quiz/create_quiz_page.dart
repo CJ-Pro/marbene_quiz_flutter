@@ -1,15 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../viewmodel/create_quiz_viewmodel.dart';
+import 'widgets/select_category.dart';
+import 'widgets/select_mode.dart';
+import 'widgets/select_subject.dart';
+import 'widgets/select_system.dart';
+import 'widgets/select_tutor.dart';
+import 'widgets/select_timer.dart';
 
 class CreateQuizPage extends StatelessWidget {
   const CreateQuizPage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final _viewModel = Get.put(CreateQuizViewModel());
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SafeArea(
-        child: ListView(
-          children: [],
+      body: _viewModel.obx(
+        (state) => SafeArea(
+          child: ListView(
+            children: const [
+              SelectMode(),
+              SelectCategory(),
+              SelectSubject(),
+              SelectSystem(),
+              SelectTutor(),
+              SelectTimer(),
+            ],
+          ),
         ),
       ),
     );
