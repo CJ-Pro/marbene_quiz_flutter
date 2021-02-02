@@ -4,15 +4,15 @@ import 'package:random_color/random_color.dart';
 
 class SelectionSliderItem extends StatefulWidget {
   final IconData iconData;
-  final String text;
-  final bool description;
+  final String title;
+  final String description;
   final Color color;
   final VoidCallback onTap;
   final bool selected;
   const SelectionSliderItem({
     Key key,
     this.iconData,
-    @required this.text,
+    @required this.title,
     @required this.description,
     @required this.onTap,
     this.color,
@@ -20,7 +20,7 @@ class SelectionSliderItem extends StatefulWidget {
   }) : super(key: key);
 
   SelectionSliderItem copyWith({
-    String text,
+    String title,
     String description,
     Color color,
     IconData iconData,
@@ -28,7 +28,7 @@ class SelectionSliderItem extends StatefulWidget {
     bool selected,
   }) {
     return SelectionSliderItem(
-      text: text ?? this.text,
+      title: title ?? this.title,
       description: description ?? this.description,
       color: color ?? this.color,
       iconData: iconData ?? this.iconData,
@@ -82,7 +82,7 @@ class _SelectionSliderItemState extends State<SelectionSliderItem> {
         child: Center(
           child: widget.iconData == null
               ? Text(
-                  widget.text[0],
+                  widget.title[0],
                   style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
@@ -100,13 +100,13 @@ class _SelectionSliderItemState extends State<SelectionSliderItem> {
   Widget _itemTitle({@required EdgeInsetsGeometry padding}) => Padding(
         padding: padding,
         child: Text(
-          widget.text * 10,
-          textAlign: TextAlign.start,
+          widget.title,
+          textAlign: TextAlign.center,
           maxLines: 3,
           overflow: TextOverflow.ellipsis,
           style: const TextStyle(
             fontWeight: FontWeight.w500,
-            fontSize: 18,
+            fontSize: 18.5,
           ),
         ),
       );

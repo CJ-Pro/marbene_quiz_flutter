@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:marbene/services/database_service.dart';
 import '../../question/model/question.dart';
+export '../../question/model/question.dart';
 
 class QuestionRepository {
   final _databaseService = Get.find<DatabaseService>();

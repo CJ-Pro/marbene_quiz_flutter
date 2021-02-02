@@ -19,12 +19,23 @@ class SelectionSlider extends StatefulWidget {
 
 class _SelectionSliderState extends State<SelectionSlider> {
   int selectedIndex;
+
+  @override
+  void initState() {
+    super.initState();
+    final defaultIndex = widget.items.indexWhere((item) => item.selected);
+    if (defaultIndex != -1) selectedIndex = defaultIndex;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         _Header(title: widget.title),
+        selectedIndex != null
+            ? _Description(widget.items[selectedIndex].description)
+            : const SizedBox.shrink(),
         _ItemScroll(
           items: widget.items,
           selectedIndex: selectedIndex,
@@ -38,9 +49,8 @@ class _SelectionSliderState extends State<SelectionSlider> {
 }
 
 class _Description extends StatelessWidget {
-  const _Description({
-    Key key,
-  }) : super(key: key);
+  final String text;
+  const _Description(this.text);
 
   @override
   Widget build(BuildContext context) {
@@ -48,10 +58,11 @@ class _Description extends StatelessWidget {
       padding: EdgeInsets.symmetric(
         horizontal: 1 / 18 * Get.width,
       ),
-      child: const Text(
-        'No Special Mode.',
-        style: TextStyle(
+      child: Text(
+        text,
+        style: const TextStyle(
           color: Colors.black54,
+          fontSize: 14.5,
           fontWeight: FontWeight.w500,
         ),
       ),
