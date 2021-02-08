@@ -8,7 +8,7 @@ const defaultTextTheme = TextTheme(
   ),
   headline1: TextStyle(
     color: Colors.black,
-    fontWeight: FontWeight.bold,
-    fontSize: 24,
+    fontWeight: FontWeight.w600,
+    fontSize: 16.5,
   ),
 );
