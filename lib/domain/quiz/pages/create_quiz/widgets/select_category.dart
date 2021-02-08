@@ -6,7 +6,11 @@ import '../../../../question/model/category_enum.dart';
 import '../../../viewmodel/create_quiz_viewmodel.dart';
 
 class SelectCategory extends StatelessWidget {
-  const SelectCategory({Key key}) : super(key: key);
+  final Set<String> categories;
+  const SelectCategory({
+    Key key,
+    @required this.categories,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +25,7 @@ class SelectCategory extends StatelessWidget {
           onTap: () {},
           selected: true,
         ),
-        for (var categoryString in _viewmodel.questionData['categories'])
+        for (var categoryString in categories)
           _getCategorySliderItem(categoryString.toQuestionCategory)
       ],
     );

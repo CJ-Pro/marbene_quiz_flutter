@@ -54,8 +54,11 @@ class _SelectionSliderItemState extends State<SelectionSliderItem> {
 
   @override
   Widget build(BuildContext context) {
-    final _oneThirdScreenWidth = 1 / 3 * Get.width;
-    final _itemMargin = EdgeInsets.all(1 / 36 * Get.width);
+    final _oneThirdScreenWidth = 1 / 4 * Get.width;
+    final _itemMargin = EdgeInsets.only(
+      top: 1 / 40 * Get.width,
+      left: 1 / 40 * Get.width,
+    );
     return Container(
       margin: _itemMargin,
       width: _oneThirdScreenWidth,
@@ -84,16 +87,11 @@ class _SelectionSliderItemState extends State<SelectionSliderItem> {
               ? Text(
                   widget.title[0],
                   style: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 50,
-                  ),
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 40),
                 )
-              : Icon(
-                  widget.iconData,
-                  size: 50,
-                  color: Colors.white,
-                ),
+              : Icon(widget.iconData, size: 40, color: Colors.white),
         ),
       );
 
@@ -102,11 +100,10 @@ class _SelectionSliderItemState extends State<SelectionSliderItem> {
         child: Text(
           widget.title,
           textAlign: TextAlign.center,
-          maxLines: 3,
+          maxLines: 2,
           overflow: TextOverflow.ellipsis,
           style: const TextStyle(
             fontWeight: FontWeight.w500,
-            fontSize: 18.5,
           ),
         ),
       );

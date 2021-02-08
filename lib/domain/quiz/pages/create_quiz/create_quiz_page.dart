@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../question/model/category_enum.dart';
 import '../../viewmodel/create_quiz_viewmodel.dart';
 import 'widgets/select_category.dart';
 import 'widgets/select_mode.dart';
 import 'widgets/select_subject.dart';
 import 'widgets/select_system.dart';
-import 'widgets/select_tutor.dart';
 import 'widgets/select_timer.dart';
+import 'widgets/select_tutor.dart';
 
 class CreateQuizPage extends StatelessWidget {
   const CreateQuizPage({Key key}) : super(key: key);
@@ -20,13 +21,20 @@ class CreateQuizPage extends StatelessWidget {
       body: _viewModel.obx(
         (state) => SafeArea(
           child: ListView(
-            children: const [
-              SelectMode(),
-              SelectCategory(),
-              SelectSubject(),
-              SelectSystem(),
-              SelectTutor(),
-              SelectTimer(),
+            children: [
+              const SelectMode(),
+              SelectCategory(
+                categories:
+                    state.map((question) => question.category.value).toSet(),
+              ),
+              SelectSubject(
+                subjects: state.map((question) => question.subject).toSet(),
+              ),
+              SelectSystem(
+                systems: state.map((question) => question.system).toSet(),
+              ),
+              const SelectTutor(),
+              const SelectTimer(),
             ],
           ),
         ),

@@ -56,13 +56,12 @@ class _Description extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(
-        horizontal: 1 / 18 * Get.width,
+        horizontal: 1 / 50 * Get.width,
       ),
       child: Text(
         text,
         style: const TextStyle(
           color: Colors.black54,
-          fontSize: 14.5,
           fontWeight: FontWeight.w500,
         ),
       ),
@@ -117,9 +116,8 @@ class _Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: 1 / 18 * Get.width,
-        vertical: 1 / 36 * Get.width,
+      padding: EdgeInsets.only(
+        left: 1 / 50 * Get.width,
       ),
       child: Text(
         title,

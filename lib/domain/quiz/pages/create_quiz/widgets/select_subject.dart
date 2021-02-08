@@ -5,7 +5,11 @@ import '../../../../../widgets/selection_slider/selection_slider.dart';
 import '../../../viewmodel/create_quiz_viewmodel.dart';
 
 class SelectSubject extends StatelessWidget {
-  const SelectSubject({Key key}) : super(key: key);
+  final Set<String> subjects;
+  const SelectSubject({
+    Key key,
+    @required this.subjects,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +24,7 @@ class SelectSubject extends StatelessWidget {
           onTap: () {},
           selected: true,
         ),
-        for (var subject in _viewmodel.questionData['subjects'])
+        for (var subject in subjects)
           SelectionSliderItem(
             title: subject,
             description: subject,
