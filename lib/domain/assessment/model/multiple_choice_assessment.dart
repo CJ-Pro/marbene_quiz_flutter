@@ -38,10 +38,6 @@ class MultipleChoiceAssessment extends Assessment {
     };
   }
 
-  factory MultipleChoiceAssessment.initial() {
-    //TODO Initial instead of blank assessment
-  }
-
   factory MultipleChoiceAssessment.fromMap(map) {
     if (map == null) return null;
 

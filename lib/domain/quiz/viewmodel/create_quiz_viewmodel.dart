@@ -6,9 +6,6 @@ import '../../question/repository/question_repository.dart';
 enum Mode { all, incorrect, notAnswered, flagged }
 
 class CreateQuizViewModel extends GetNotifier<Set<Question>> {
-  QuestionCategory _category;
-  String _subject;
-  String _system;
   CreateQuizViewModel() : super(const <Question>{});
 
   @override
@@ -18,6 +15,27 @@ class CreateQuizViewModel extends GetNotifier<Set<Question>> {
   }
 
   UnmodifiableListView<Question> _questions;
+
+  Set<String> get categories =>
+      _questions.map((question) => question.category.value).toSet();
+
+  Set<String> get subjects =>
+      _questions.map((question) => question.subject).toSet();
+
+  QuestionCategory _category;
+  set category(QuestionCategory category) {
+    _category = category;
+    updateValidQuestions();
+  }
+
+  String _subject;
+  set subject(String subject) {
+    _subject = subject;
+    updateValidQuestions();
+  }
+
+  String _system;
+  set system(String system) => _system = system;
 
   void _loadQuestions() async {
     try {
@@ -34,18 +52,21 @@ class CreateQuizViewModel extends GetNotifier<Set<Question>> {
     return true;
   }
 
-  isValidSubject(Question question) => question.subject == _subject;
+  bool isValidSubject(Question question) {
+    if (_subject == null) return true;
+    return question.subject == _subject;
+  }
 
-  isValidSystem(Question question) => question.system == _system;
-
-  bool isValidCategory(Question question) => question.category == _category;
+  bool isValidCategory(Question question) {
+    if (_category == null) return true;
+    return question.category == _category;
+  }
 
   void updateValidQuestions() {
     change(_questions
         .where(isValidMode)
         .where(isValidCategory)
         .where(isValidSubject)
-        .where(isValidSystem)
         .toSet());
   }
 }

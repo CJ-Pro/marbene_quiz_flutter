@@ -21,14 +21,14 @@ class SelectSystem extends StatelessWidget {
           title: 'All',
           description: 'All systems.',
           iconData: Icons.all_inclusive_rounded,
-          onTap: () {},
+          onTap: () => _viewmodel.system = null,
           selected: true,
         ),
         for (var system in systems)
           SelectionSliderItem(
             title: system,
             description: system,
-            onTap: () {},
+            onTap: () => _viewmodel.system = system,
           ),
       ],
     );

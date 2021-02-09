@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'selection_slider_item.dart';
@@ -26,6 +27,18 @@ class _SelectionSliderState extends State<SelectionSlider> {
     final defaultIndex = widget.items.indexWhere((item) => item.selected);
     if (defaultIndex != -1) selectedIndex = defaultIndex;
   }
+
+  @override
+  void didUpdateWidget(SelectionSlider oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (!listEquals(
+      oldWidget.items.map(getSliderId).toList(),
+      widget.items.map(getSliderId).toList(),
+    )) selectedIndex = 0;
+  }
+
+  String getSliderId(SelectionSliderItem item) => '${item.key}';
 
   @override
   Widget build(BuildContext context) {

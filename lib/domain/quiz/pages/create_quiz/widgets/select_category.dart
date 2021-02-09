@@ -22,7 +22,7 @@ class SelectCategory extends StatelessWidget {
           title: 'All',
           description: 'All categories available.',
           iconData: Icons.all_inclusive_rounded,
-          onTap: () {},
+          onTap: () => _viewmodel.category = null,
           selected: true,
         ),
         for (var categoryString in categories)
@@ -32,13 +32,14 @@ class SelectCategory extends StatelessWidget {
   }
 
   SelectionSliderItem _getCategorySliderItem(QuestionCategory category) {
+    final _viewmodel = Get.find<CreateQuizViewModel>();
     switch (category) {
       case QuestionCategory.multipleChoice:
         return SelectionSliderItem(
           title: 'Multiple Choice',
           description: 'Only multiple choice questions.',
           iconData: Icons.article_rounded,
-          onTap: () {},
+          onTap: () => _viewmodel.category = category,
         );
         break;
       case QuestionCategory.pictureTest:
@@ -46,7 +47,7 @@ class SelectCategory extends StatelessWidget {
           title: 'Picture Test',
           description: 'Only picture questions.',
           iconData: Icons.picture_in_picture_alt_rounded,
-          onTap: () {},
+          onTap: () => _viewmodel.category = category,
         );
         break;
       case QuestionCategory.theory:
@@ -54,7 +55,7 @@ class SelectCategory extends StatelessWidget {
           title: 'Theory',
           description: 'Only theory questions.',
           iconData: Icons.school_rounded,
-          onTap: () {},
+          onTap: () => _viewmodel.category = category,
         );
         break;
     }

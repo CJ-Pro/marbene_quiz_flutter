@@ -24,11 +24,10 @@ class CreateQuizPage extends StatelessWidget {
             children: [
               const SelectMode(),
               SelectCategory(
-                categories:
-                    state.map((question) => question.category.value).toSet(),
+                categories: _viewModel.categories,
               ),
               SelectSubject(
-                subjects: state.map((question) => question.subject).toSet(),
+                subjects: _viewModel.subjects,
               ),
               SelectSystem(
                 systems: state.map((question) => question.system).toSet(),

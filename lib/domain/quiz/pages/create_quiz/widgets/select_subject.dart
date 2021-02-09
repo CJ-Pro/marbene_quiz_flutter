@@ -21,14 +21,14 @@ class SelectSubject extends StatelessWidget {
           title: 'All',
           description: 'All subjects.',
           iconData: Icons.all_inclusive_rounded,
-          onTap: () {},
+          onTap: () => _viewmodel.subject = null,
           selected: true,
         ),
         for (var subject in subjects)
           SelectionSliderItem(
             title: subject,
             description: subject,
-            onTap: () {},
+            onTap: () => _viewmodel.subject = subject,
           ),
       ],
     );
