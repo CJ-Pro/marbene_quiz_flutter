@@ -22,6 +22,9 @@ class CreateQuizViewModel extends GetNotifier<Set<Question>> {
   Set<String> get subjects =>
       _questions.map((question) => question.subject).toSet();
 
+  Set<String> get systems =>
+      _subjects.map((question) => question.system).toSet();
+
   QuestionCategory _category;
   set category(QuestionCategory category) {
     _category = category;
@@ -35,7 +38,10 @@ class CreateQuizViewModel extends GetNotifier<Set<Question>> {
   }
 
   String _system;
-  set system(String system) => _system = system;
+  set system(String system) {
+    _system = system;
+    updateValidQuestions();
+  }
 
   void _loadQuestions() async {
     try {
@@ -52,21 +58,29 @@ class CreateQuizViewModel extends GetNotifier<Set<Question>> {
     return true;
   }
 
-  bool isValidSubject(Question question) {
-    if (_subject == null) return true;
-    return question.subject == _subject;
-  }
-
   bool isValidCategory(Question question) {
     if (_category == null) return true;
     return question.category == _category;
   }
 
+  bool isValidSubject(Question question) {
+    if (_subject == null) return true;
+    return question.subject == _subject;
+  }
+
+  bool isValidSystem(Question question) {
+    if (_system == null) return true;
+    return question.system == _system;
+  }
+
+  Iterable<Question> get _subjects => _questions
+      .where(isValidMode)
+      .where(isValidCategory)
+      .where(isValidSubject);
+
   void updateValidQuestions() {
-    change(_questions
-        .where(isValidMode)
-        .where(isValidCategory)
-        .where(isValidSubject)
-        .toSet());
+    change(
+      _subjects.where(isValidSystem).toSet(),
+    );
   }
 }
