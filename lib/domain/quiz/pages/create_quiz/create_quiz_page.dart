@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../question/model/category_enum.dart';
 import '../../viewmodel/create_quiz_viewmodel.dart';
 import 'widgets/select_category.dart';
 import 'widgets/select_mode.dart';
@@ -22,6 +21,12 @@ class CreateQuizPage extends StatelessWidget {
         (state) => SafeArea(
           child: ListView(
             children: [
+              Center(
+                child: Text(
+                  '${state.length}',
+                  style: Theme.of(context).textTheme.headline1,
+                ),
+              ),
               const SelectMode(),
               SelectCategory(
                 categories: _viewModel.categories,
@@ -30,7 +35,7 @@ class CreateQuizPage extends StatelessWidget {
                 subjects: _viewModel.subjects,
               ),
               SelectSystem(
-                systems: state.map((question) => question.system).toSet(),
+                systems: _viewModel.systems,
               ),
               const SelectTutor(),
               const SelectTimer(),
