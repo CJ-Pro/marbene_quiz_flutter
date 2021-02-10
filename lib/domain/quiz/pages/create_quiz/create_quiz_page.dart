@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:marbene/domain/quiz/pages/create_quiz/widgets/create_quiz_button.dart';
 
 import '../../viewmodel/create_quiz_viewmodel.dart';
+import 'widgets/maximum_question_slider.dart';
 import 'widgets/select_category.dart';
 import 'widgets/select_mode.dart';
 import 'widgets/select_subject.dart';
 import 'widgets/select_system.dart';
-import 'widgets/select_timer.dart';
-import 'widgets/select_tutor.dart';
+import 'widgets/timer_switch.dart';
+import 'widgets/tutor_switch.dart';
 
 class CreateQuizPage extends StatelessWidget {
   const CreateQuizPage({Key key}) : super(key: key);
@@ -37,8 +39,14 @@ class CreateQuizPage extends StatelessWidget {
               SelectSystem(
                 systems: _viewModel.systems,
               ),
-              const SelectTutor(),
-              const SelectTimer(),
+              const SizedBox(height: 12),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [const TimerSwitch(), const TutorSwitch()],
+              ),
+              const SizedBox(height: 12),
+              const MaximumQuestionSlider(),
+              const CreateQuizButton(),
             ],
           ),
         ),
