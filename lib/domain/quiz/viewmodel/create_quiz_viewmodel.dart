@@ -16,6 +16,18 @@ class CreateQuizViewModel extends GetNotifier<Set<Question>> {
 
   UnmodifiableListView<Question> _questions;
 
+  final _hasTimer = false.obs;
+  bool get hasTimer => _hasTimer.value;
+  set hasTimer(value) => _hasTimer(value);
+
+  final _hasTutor = true.obs;
+  bool get hasTutor => _hasTutor.value;
+  set hasTutor(value) => _hasTutor(value);
+
+  final _maxNumberOfQuestions = 25.0.obs;
+  double get maxNumberOfQuestions => _maxNumberOfQuestions.value;
+  set maxNumberOfQuestions(value) => _maxNumberOfQuestions(value);
+
   Set<String> get categories =>
       _questions.map((question) => question.category.value).toSet();
 
