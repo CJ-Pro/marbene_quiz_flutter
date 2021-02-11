@@ -21,32 +21,36 @@ class CreateQuizPage extends StatelessWidget {
       backgroundColor: Colors.white,
       body: _viewModel.obx(
         (state) => SafeArea(
-          child: ListView(
+          child: Column(
             children: [
-              Center(
-                child: Text(
-                  '${state.length}',
-                  style: Theme.of(context).textTheme.headline1,
+              Text(
+                '${state.length} question choices',
+                style: Theme.of(context).textTheme.headline1,
+              ),
+              Expanded(
+                child: ListView(
+                  children: [
+                    const SelectMode(),
+                    SelectCategory(
+                      categories: _viewModel.categories,
+                    ),
+                    SelectSubject(
+                      subjects: _viewModel.subjects,
+                    ),
+                    SelectSystem(
+                      systems: _viewModel.systems,
+                    ),
+                    const SizedBox(height: 12),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [const TimerSwitch(), const TutorSwitch()],
+                    ),
+                    const SizedBox(height: 12),
+                    const MaximumQuestionSlider(),
+                    const CreateQuizButton(),
+                  ],
                 ),
               ),
-              const SelectMode(),
-              SelectCategory(
-                categories: _viewModel.categories,
-              ),
-              SelectSubject(
-                subjects: _viewModel.subjects,
-              ),
-              SelectSystem(
-                systems: _viewModel.systems,
-              ),
-              const SizedBox(height: 12),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [const TimerSwitch(), const TutorSwitch()],
-              ),
-              const SizedBox(height: 12),
-              const MaximumQuestionSlider(),
-              const CreateQuizButton(),
             ],
           ),
         ),
