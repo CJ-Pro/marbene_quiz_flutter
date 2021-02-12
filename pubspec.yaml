@@ -16,6 +16,7 @@ dependencies:
   flutter_html: ^1.1.1
   flutter_login: ^1.0.14
   get: ^3.23.1
+  intl: ^0.16.1
   random_color: ^1.0.5
 
 dev_dependencies:
