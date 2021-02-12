@@ -11,4 +11,9 @@ const defaultTextTheme = TextTheme(
     fontWeight: FontWeight.w600,
     fontSize: 16.5,
   ),
+  headline2: TextStyle(
+    color: Colors.black,
+    fontWeight: FontWeight.w500,
+    fontSize: 14.5,
+  ),
 );
