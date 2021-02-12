@@ -2,10 +2,10 @@ import 'dart:collection';
 
 import 'package:get/get.dart';
 
+import '../../../paths/firebase_database_paths.dart';
 import '../../../services/database_service.dart';
 import '../../question/model/question.dart';
 import '../model/quiz.dart';
-import '../paths/quiz_paths.dart';
 
 class QuizRepository {
   final _databaseService = Get.find<DatabaseService>();
@@ -20,14 +20,14 @@ class QuizRepository {
       id: creationTimeStamp,
       assessments: UnmodifiableListView(assesments),
     );
-    _databaseService.setData(FirebaseQuizPath().userQuiz,
+    _databaseService.setData(FirebaseDatabasePath().userQuiz,
         creationTimeStamp.toString(), quiz.toMap());
     return Future.value(quiz);
   }
 
   Future<List<Quiz>> getAllPreviousQuiz() async {
     final snapshot =
-        await _databaseService.getSnapshot(FirebaseQuizPath().userQuiz);
+        await _databaseService.getSnapshot(FirebaseDatabasePath().userQuiz);
     return Map<String, dynamic>.from(snapshot.value ?? {})
         ?.values
         ?.map((map) => Quiz.fromMap(Map<String, dynamic>.from(map)))
@@ -36,6 +36,6 @@ class QuizRepository {
 
   void setQuizIndex(int quizId, int index) {
     _databaseService.updateData(
-        FirebaseQuizPath().getUserQuizById(quizId), {'index': index});
+        FirebaseDatabasePath().getUserQuizById(quizId), {'index': index});
   }
 }
