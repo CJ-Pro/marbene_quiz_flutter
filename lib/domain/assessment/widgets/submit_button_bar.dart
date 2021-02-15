@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../quiz/viewmodel/start_quiz_viewmodel.dart';
+import '../../quiz/viewmodel/quiz_viewmodel.dart';
 
 class SubmitButtonBar extends StatelessWidget {
   final VoidCallback onSubmit;

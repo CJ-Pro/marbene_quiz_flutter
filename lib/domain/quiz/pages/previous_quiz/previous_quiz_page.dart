@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import '../../../../widgets/loading/loading.dart';
 import '../../model/quiz.dart';
 import '../../viewmodel/previous_quiz_viewmodel.dart';
-import '../start_quiz/start_quiz_page.dart';
+import '../quiz/quiz_page.dart';
 
 class PreviousQuizPage extends StatelessWidget {
   const PreviousQuizPage({Key key}) : super(key: key);
@@ -34,11 +34,12 @@ class PreviousQuizPage extends StatelessWidget {
             itemBuilder: (_, index) {
               final quiz = state[index];
               return GestureDetector(
-                onTap: () => Get.to(
-                  StartQuizPage(
-                    quiz: quiz,
-                  ),
-                ),
+                onTap: () async {
+                  await Get.to(
+                    QuizPage(quiz: quiz),
+                  );
+                  _viewmodel.reload();
+                },
                 child: Card(
                   elevation: 5,
                   margin: const EdgeInsets.all(16),
