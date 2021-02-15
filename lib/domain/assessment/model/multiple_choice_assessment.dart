@@ -44,7 +44,10 @@ class MultipleChoiceAssessment extends Assessment {
     return MultipleChoiceAssessment(
       questionId: map['questionId'],
       category: (map['category'] as String)?.toQuestionCategory,
-      answer: map['answer'],
+      answer: map['answer'] != null
+          ? MultipleChoiceAnswer.fromMap(
+              Map<String, dynamic>.from(map['answer']))
+          : null,
       currentChoice: map['currentChoice'],
     );
   }
