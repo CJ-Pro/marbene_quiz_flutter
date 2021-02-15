@@ -34,8 +34,22 @@ class QuizRepository {
         ?.toList();
   }
 
-  void setQuizIndex(int quizId, int index) {
+  void updateQuizIndex(int quizId, int index) {
     _databaseService.updateData(
         FirebaseDatabasePath().getUserQuizById(quizId), {'index': index});
+  }
+
+  void updateAssessmentChoice(int quizId, int assessmentId, int choiceIndex) {
+    _databaseService.updateData(
+        FirebaseDatabasePath().getCurrentAssessment(quizId, assessmentId),
+        {'currentChoice': choiceIndex});
+  }
+
+  void setAssessmentAnswer(
+      int quizId, int assessmentId, Map<String, dynamic> answer) {
+    _databaseService.setData(
+        FirebaseDatabasePath().getCurrentAssessment(quizId, assessmentId),
+        'answer',
+        answer);
   }
 }
