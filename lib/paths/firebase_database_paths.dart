@@ -8,6 +8,10 @@ class FirebaseDatabasePath {
   String get userQuiz => 'quiz/$_userId/';
   String getUserQuizById(int quizId) => 'quiz/$_userId/$quizId/';
 
+  //Assessment
+  String getCurrentAssessment(int quizId, int assessmentId) =>
+      '${getUserQuizById(quizId)}/assessments/$assessmentId/';
+
   //Answered
   String get userAnswers => 'answers/$_userId/';
 
