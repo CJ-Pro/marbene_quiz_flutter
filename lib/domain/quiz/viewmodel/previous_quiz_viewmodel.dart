@@ -9,10 +9,10 @@ class PreviousQuizViewModel extends GetNotifier<List<Quiz>> {
   @override
   void onInit() {
     super.onInit();
-    loadPreviousQuiz();
+    _loadPreviousQuiz();
   }
 
-  Future<void> loadPreviousQuiz() async {
+  Future<void> _loadPreviousQuiz() async {
     try {
       change(value, status: RxStatus.loading());
       final previousQuizData =
@@ -21,5 +21,9 @@ class PreviousQuizViewModel extends GetNotifier<List<Quiz>> {
     } catch (e) {
       change(value, status: RxStatus.error(e.toString()));
     }
+  }
+
+  void reload() {
+    _loadPreviousQuiz();
   }
 }
