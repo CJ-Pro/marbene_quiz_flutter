@@ -31,7 +31,7 @@ class QuizViewModel extends GetNotifier<Quiz> {
 
   int get assessmentId => currentAssessmentId;
 
-  int get currentPage => _currentPage.value;
+  int get currentPage => _currentPage.value + 1;
 
   int get totalPages => value.assessments.length;
 }

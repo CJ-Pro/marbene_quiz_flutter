@@ -20,20 +20,7 @@ class QuizPage extends StatelessWidget {
         child: _viewmodel.obx(
           (state) => Column(
             children: [
-              Obx(
-                () => Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    IconButton(
-                        icon: const Icon(Icons.report_rounded),
-                        onPressed: () {}),
-                    Text(
-                        'Question ${_viewmodel.currentPage} of ${_viewmodel.totalPages}'),
-                    IconButton(
-                        icon: const Icon(Icons.flag_rounded), onPressed: () {}),
-                  ],
-                ),
-              ),
+              _TopBar(viewmodel: _viewmodel),
               Expanded(
                 child: PageView.builder(
                   itemCount: state.assessments.length,
@@ -57,9 +44,48 @@ class QuizPage extends StatelessWidget {
     if (assessment is MultipleChoiceAssessment) {
       return MultipleChoiceAssessmentWidget(assessment);
     } else if (assessment is TheoryAssessment) {
-      return Container();
+      return const Center(
+        child: Text('Work in Progress.'),
+      );
     } else {
       return Container();
     }
+  }
+}
+
+class _TopBar extends StatelessWidget {
+  const _TopBar({
+    Key key,
+    @required QuizViewModel viewmodel,
+  })  : _viewmodel = viewmodel,
+        super(key: key);
+
+  final QuizViewModel _viewmodel;
+
+  @override
+  Widget build(BuildContext context) {
+    return Obx(
+      () => Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          IconButton(
+              icon: const Icon(
+                Icons.report_rounded,
+                size: 30,
+              ),
+              onPressed: () {}),
+          Text(
+            'Question ${_viewmodel.currentPage} of ${_viewmodel.totalPages}',
+            style: Theme.of(context).textTheme.headline2,
+          ),
+          IconButton(
+              icon: const Icon(
+                Icons.flag_rounded,
+                size: 30,
+              ),
+              onPressed: () {}),
+        ],
+      ),
+    );
   }
 }

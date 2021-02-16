@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../question/repository/question_repository.dart';
 import '../../quiz/repository/quiz_repository.dart';
+import '../pages/quiz/quiz_page.dart';
 
 enum Mode { all, incorrect, notAnswered, flagged }
 
@@ -103,7 +104,7 @@ class CreateQuizViewModel extends GetNotifier<Set<Question>> {
       change(value, status: RxStatus.loading());
       final quiz = await Get.put(QuizRepository())
           .createQuiz(state.take(maxNumberOfQuestions.round()).toSet());
-      //TODO Navigate to view quiz.
+      await Get.to(QuizPage(quiz: quiz));
     } catch (e) {
       Get.snackbar('Error', '$e',
           colorText: Colors.red, backgroundColor: Colors.white);

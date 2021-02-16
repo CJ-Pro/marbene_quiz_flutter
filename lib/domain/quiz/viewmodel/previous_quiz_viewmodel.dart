@@ -17,7 +17,9 @@ class PreviousQuizViewModel extends GetNotifier<List<Quiz>> {
       change(value, status: RxStatus.loading());
       final previousQuizData =
           await Get.put(QuizService()).getAllPreviousQuizSortedByTimestamp();
-      change(previousQuizData, status: RxStatus.success());
+      change(previousQuizData,
+          status:
+              previousQuizData.isEmpty ? RxStatus.empty() : RxStatus.success());
     } catch (e) {
       change(value, status: RxStatus.error(e.toString()));
     }

@@ -94,6 +94,11 @@ class PreviousQuizPage extends StatelessWidget {
             },
           ),
           onLoading: const Loading(),
+          onEmpty: const Center(
+              child: Text(
+            'No quiz available. Create a new quiz to get started.',
+            textAlign: TextAlign.center,
+          )),
         ),
       ),
     );

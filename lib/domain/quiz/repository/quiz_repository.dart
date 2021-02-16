@@ -46,10 +46,13 @@ class QuizRepository {
   }
 
   void setAssessmentAnswer(
-      int quizId, int assessmentId, Map<String, dynamic> answer) {
-    _databaseService.setData(
-        FirebaseDatabasePath().getCurrentAssessment(quizId, assessmentId),
-        'answer',
-        answer);
+      int quizId, int assessmentId, int answerId, Map<String, dynamic> answer) {
+    _databaseService
+      ..setData(
+          FirebaseDatabasePath().getCurrentAssessment(quizId, assessmentId),
+          'answer',
+          answer)
+      ..setData(
+          FirebaseDatabasePath().userAnswers, answerId.toString(), answer);
   }
 }
