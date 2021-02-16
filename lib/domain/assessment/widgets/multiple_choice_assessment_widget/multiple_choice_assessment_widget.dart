@@ -24,13 +24,12 @@ class MultipleChoiceAssessmentWidget extends AssessmentWidget {
           children: [
             QuestionBlock(question: _question.question),
             _ChoiceList(
-              choices: _question.choices,
-              currentChoice: state.currentChoice,
-              labels: _viewmodel.choiceLabels,
-              onTap: _viewmodel.updateChoice,
-              isSubmitted: state.isSubmitted,
-              correctChoice: _question.answer,
-            ),
+                choices: _question.choices,
+                currentChoice: state.currentChoice,
+                labels: _viewmodel.choiceLabels,
+                onTap: _viewmodel.updateChoice,
+                isSubmitted: state.isSubmitted,
+                correctChoice: _question.answerIndex),
             state.isSubmitted
                 ? ExplanationBlock(explanation: _question.explanation)
                 : const SizedBox.shrink(),
