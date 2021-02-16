@@ -47,7 +47,7 @@ class MultipleChoiceAssessmentViewModel
     final answer = MultipleChoiceAnswer(value.questionId, value.currentChoice,
         value.currentChoice == _question.answer);
     change(value.copyWith(answer: answer));
-    _quizRepository.setAssessmentAnswer(
-        _quizViewModel.quizId, _quizViewModel.assessmentId, answer.toMap());
+    _quizRepository.setAssessmentAnswer(_quizViewModel.quizId,
+        _quizViewModel.assessmentId, answer.questionId, answer.toMap());
   }
 }
