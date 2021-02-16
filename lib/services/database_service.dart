@@ -25,10 +25,14 @@ class DatabaseService extends GetxService {
   }
 
   void setData(String path, String key, dynamic value) {
-    _ref.child(path)..child(key).set(value);
+    _ref.child(path).child(key).set(value);
   }
 
   void updateData(String path, Map<String, dynamic> value) {
-    _ref.child(path)..update(value);
+    _ref.child(path).update(value);
+  }
+
+  void pushData(String path, dynamic value) {
+    _ref.child(path).push().set(value);
   }
 }
