@@ -110,6 +110,8 @@ class MultipleChoice extends Question {
     return id.hashCode;
   }
 
+  int get answerIndex => answer - 1;
+
   @override
   Assessment get newAssessment => MultipleChoiceAssessment(
         questionId: id,
